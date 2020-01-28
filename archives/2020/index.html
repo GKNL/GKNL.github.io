@@ -52,7 +52,7 @@
     },
     localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: './public/search.xml',
-    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
@@ -111,7 +111,7 @@
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container">
+  <div class="container use-motion">
     <div class="headband"></div>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -400,8 +400,12 @@
   
   <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/GKNL.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/GKNL.github.io/lib/anime.min.js"></script>
+  <script src="/GKNL.github.io/lib/velocity/velocity.min.js"></script>
+  <script src="/GKNL.github.io/lib/velocity/velocity.ui.min.js"></script>
 
 <script src="/GKNL.github.io/js/utils.js"></script>
+
+<script src="/GKNL.github.io/js/motion.js"></script>
 
 
 <script src="/GKNL.github.io/js/schemes/muse.js"></script>
