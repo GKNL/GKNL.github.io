@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>王道机试第二章《经典入门》——1.排序</title>
+      <link href="/GKNL.github.io/2020/01/30/%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%8A%E7%BB%8F%E5%85%B8%E5%85%A5%E9%97%A8%E3%80%8B%E2%80%94%E2%80%941-%E6%8E%92%E5%BA%8F/"/>
+      <url>/GKNL.github.io/2020/01/30/%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%8A%E7%BB%8F%E5%85%B8%E5%85%A5%E9%97%A8%E3%80%8B%E2%80%94%E2%80%941-%E6%8E%92%E5%BA%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="例2-2-成绩排序"><a href="#例2-2-成绩排序" class="headerlink" title="例2.2 成绩排序"></a>例2.2 成绩排序</h1><blockquote><p>使用C++的Sort函数解题</p></blockquote><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//sort函数的两个参数代表待排序内存的起始地址和结束地址</span></span><br><span class="line"><span class="comment">//在此例中起始地址为buf，结束地址为buf+n</span></span><br><span class="line">sort (buf,buf + n);</span><br></pre></td></tr></table></figure><p><img src="/GKNL.github.io/GKNL.github.io/2020/01/30/%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%8A%E7%BB%8F%E5%85%B8%E5%85%A5%E9%97%A8%E3%80%8B%E2%80%94%E2%80%941-%E6%8E%92/pasted-0.png" alt="玖涯博客"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 王道考研机试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 机试 </tag>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/GKNL.github.io/2020/01/14/hello-world/"/>
       <url>/GKNL.github.io/2020/01/14/hello-world/</url>
