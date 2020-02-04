@@ -50,18 +50,22 @@
   };
 </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+  <meta name="description" content="例2.2 成绩排序 关键点：使用C++的Sort函数解题(注意重写cmp函数)  123456#include&lt;algorithm&gt;using namespace std;&#x2F;&#x2F;sort函数的两个参数代表待排序内存的起始地址和结束地址&#x2F;&#x2F;在此例中起始地址为buf，结束地址为buf+nsort (buf,buf + n);">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://gknl.github.io/2020/01/14/hello-world/index.html">
+<meta property="og:title" content="王道机试第二章《经典入门》——1.排序">
+<meta property="og:url" content="https://gknl.github.io/2020/01/30/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%8A%E7%BB%8F%E5%85%B8%E5%85%A5%E9%97%A8%E3%80%8B%E2%80%94%E2%80%941-%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="钢盔女郎の博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta property="article:published_time" content="2020-01-14T06:58:00.000Z">
-<meta property="article:modified_time" content="2020-01-30T12:20:23.222Z">
+<meta property="og:description" content="例2.2 成绩排序 关键点：使用C++的Sort函数解题(注意重写cmp函数)  123456#include&lt;algorithm&gt;using namespace std;&#x2F;&#x2F;sort函数的两个参数代表待排序内存的起始地址和结束地址&#x2F;&#x2F;在此例中起始地址为buf，结束地址为buf+nsort (buf,buf + n);">
+<meta property="og:image" content="https://gknl.github.io/GKNL.github.io/GKNL.github.io/2020/01/30/%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%8A%E7%BB%8F%E5%85%B8%E5%85%A5%E9%97%A8%E3%80%8B%E2%80%94%E2%80%941-%E6%8E%92/pasted-0.png">
+<meta property="article:published_time" content="2020-01-30T08:39:00.000Z">
+<meta property="article:modified_time" content="2020-02-04T12:40:45.633Z">
 <meta property="article:author" content="PM">
+<meta property="article:tag" content="机试">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gknl.github.io/GKNL.github.io/GKNL.github.io/2020/01/30/%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%8A%E7%BB%8F%E5%85%B8%E5%85%A5%E9%97%A8%E3%80%8B%E2%80%94%E2%80%941-%E6%8E%92/pasted-0.png">
 
-<link rel="canonical" href="https://gknl.github.io/2020/01/14/hello-world/">
+<link rel="canonical" href="https://gknl.github.io/2020/01/30/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%8A%E7%BB%8F%E5%85%B8%E5%85%A5%E9%97%A8%E3%80%8B%E2%80%94%E2%80%941-%E6%8E%92%E5%BA%8F/">
 
 
 <script id="page-configurations">
@@ -73,7 +77,7 @@
   };
 </script>
 
-  <title>Hello World | 钢盔女郎の博客</title>
+  <title>王道机试第二章《经典入门》——1.排序 | 钢盔女郎の博客</title>
   
 
 
@@ -213,7 +217,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://gknl.github.io/2020/01/14/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://gknl.github.io/2020/01/30/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%8A%E7%BB%8F%E5%85%B8%E5%85%A5%E9%97%A8%E3%80%8B%E2%80%94%E2%80%941-%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/headImage.jpeg">
@@ -226,7 +230,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          王道机试第二章《经典入门》——1.排序
         </h1>
 
         <div class="post-meta">
@@ -236,15 +240,26 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-01-14 14:58:00" itemprop="dateCreated datePublished" datetime="2020-01-14T14:58:00+08:00">2020-01-14</time>
+              <time title="创建时间：2020-01-30 16:39:00" itemprop="dateCreated datePublished" datetime="2020-01-30T16:39:00+08:00">2020-01-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-30 20:20:23" itemprop="dateModified" datetime="2020-01-30T20:20:23+08:00">2020-01-30</time>
+                <time title="修改时间：2020-02-04 20:40:45" itemprop="dateModified" datetime="2020-02-04T20:40:45+08:00">2020-02-04</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%8E%8B%E9%81%93%E8%80%83%E7%A0%94%E6%9C%BA%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">王道考研机试</span>
+                  </a>
+                </span>
+            </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -262,8 +277,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/01/14/hello-world/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/14/hello-world/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/01/30/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%8A%E7%BB%8F%E5%85%B8%E5%85%A5%E9%97%A8%E3%80%8B%E2%80%94%E2%80%941-%E6%8E%92%E5%BA%8F/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/01/30/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%8A%E7%BB%8F%E5%85%B8%E5%85%A5%E9%97%A8%E3%80%8B%E2%80%94%E2%80%941-%E6%8E%92%E5%BA%8F/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -273,7 +288,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>299</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -292,21 +307,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+        <h1 id="例2-2-成绩排序"><a href="#例2-2-成绩排序" class="headerlink" title="例2.2 成绩排序"></a>例2.2 成绩排序</h1><blockquote>
+<p><font color=#FF0000 >关键点：使用C++的Sort函数解题(注意重写cmp函数)</font></p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//sort函数的两个参数代表待排序内存的起始地址和结束地址</span></span><br><span class="line"><span class="comment">//在此例中起始地址为buf，结束地址为buf+n</span></span><br><span class="line">sort (buf,buf + n);</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p><img src="/GKNL.github.io/GKNL.github.io/2020/01/30/%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%8A%E7%BB%8F%E5%85%B8%E5%85%A5%E9%97%A8%E3%80%8B%E2%80%94%E2%80%941-%E6%8E%92/pasted-0.png" alt="玖涯博客"></p>
+<h2 id="C-解法"><a href="#C-解法" class="headerlink" title="C++解法"></a>C++解法</h2><ol>
+<li>解法一：重写cmp()函数<blockquote>
+<p>补充：关于<a href="http://c.biancheng.net/view/1407.html" target="_blank" rel="noopener">C++结构体</a></p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义结构体E</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">E</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">101</span>];</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">int</span> score;</span><br><span class="line">&#125;;</span><br><span class="line">E buf[<span class="number">1000</span>];<span class="comment">//声明结构体数组buf</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//自定义sort函数的比较规则</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(E a,E b)</span></span>&#123;</span><br><span class="line">    <span class="comment">//按分数升序排序</span></span><br><span class="line">    <span class="keyword">if</span>(a.score != b.score)&#123;</span><br><span class="line">        <span class="keyword">return</span> a.score &lt; b.score;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//int strcmp(const char *str1, const char *str2) 把 str1 所指向的字符串和 str2 所指向的字符串进行比较</span></span><br><span class="line">    <span class="comment">//如果返回值 &lt; 0，则表示 str1 小于 str2;如果返回值 &gt; 0，则表示 str1 大于 str2</span></span><br><span class="line">    <span class="comment">//如果返回值=0，则表示str1等于str2</span></span><br><span class="line">    <span class="keyword">int</span> tmp = <span class="built_in">strcmp</span>(a.name,b.name);</span><br><span class="line">    <span class="keyword">if</span>(tmp!=<span class="number">0</span>) <span class="keyword">return</span> tmp&lt;<span class="number">0</span>;<span class="comment">//若分数相同，则按名字字典序升序排列(字典序小者在前)</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> a.age &lt; b.age;<span class="comment">//若分数、名字均相同，则按年龄升序排列</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n) != EOF)&#123;</span><br><span class="line">        <span class="comment">//输入并赋值</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%s%d%d"</span>,buf[i].name,&amp;buf[i].age,&amp;buf[i].score);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//使用sort函数进行排序操作(注意第三个参数:cmp函数)</span></span><br><span class="line">        sort(buf,buf+n,cmp);</span><br><span class="line">        <span class="comment">//输出排序后的结果</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%s %d %d\n"</span>,buf[i].name,buf[i].age,buf[i].score);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上述代码中，如果忽略了第三个参数，那么系统会以不知道排序规则为由（找不到合适的“小于”运算符）而给出编译错误。由此，得到了第二种解法。</p>
+<ol start="2">
+<li>解法二：重载”&lt;”运算符</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//利用C++算符重载直接定义小于运算符</span></span><br><span class="line"><span class="comment">//注意这里函数的参数：结构体普遍使用引用传递(值传递需要完全地对其进行复制，消耗时间与空间)</span></span><br><span class="line"><span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> E &amp;b) <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(score != b.score)&#123;</span><br><span class="line">        <span class="keyword">return</span> score &lt; b.score;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> tmp = <span class="built_in">strcmp</span>(name,b.name);</span><br><span class="line">    <span class="keyword">if</span>(tmp != <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> tmp &lt; <span class="number">0</span>;<span class="comment">//若分数相同，则按名字字典序升序排列(字典序小者在前)</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age&lt;b.age;<span class="comment">//若分数、名字均相同，则按年龄升序排列</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -334,16 +353,23 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E8%AF%95/" rel="tag"># 机试</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
 
         
 
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/01/30/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%8A%E7%BB%8F%E5%85%B8%E5%85%A5%E9%97%A8%E3%80%8B%E2%80%94%E2%80%941-%E6%8E%92%E5%BA%8F/" rel="next" title="王道机试第二章《经典入门》——1.排序">
-      王道机试第二章《经典入门》——1.排序 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/01/14/hello-world/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/01/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%8A%E7%BB%8F%E5%85%B8%E5%85%A5%E9%97%A8%E3%80%8B%E2%80%94%E2%80%942-%E6%97%A5%E6%9C%9F%E7%B1%BB%E9%97%AE%E9%A2%98/" rel="next" title="王道机试第二章《经典入门》——2.日期类问题">
+      王道机试第二章《经典入门》——2.日期类问题 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -405,7 +431,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#例2-2-成绩排序"><span class="nav-number">1.</span> <span class="nav-text">例2.2 成绩排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-解法"><span class="nav-number">1.2.</span> <span class="nav-text">C++解法</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
