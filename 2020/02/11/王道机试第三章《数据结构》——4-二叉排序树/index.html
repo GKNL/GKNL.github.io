@@ -50,20 +50,22 @@
   };
 </script>
 
-  <meta name="description" content="前言 使用数据结构堆来辅助求解哈夫曼树，是求哈夫曼树的最佳选择。学会求解哈夫曼树，还要学会在实际运用中确定哈夫曼树模型。最经典的问题模型为哈夫曼编码、多个数的两两合并等。  几个关键概念 路径：  从任意一个结点到达另一个结点的通路。 路径长度：  该路径上所需经过的边的个数。 结点的带权路径长度：  从根结点到达该节点的路径长度再乘以该结点权值。 树的带权路径长度和：  树所有的叶子结点的带权路">
+  <meta name="description" content="前言定义 二叉排序树（亦即二叉搜索树）是一颗二叉树，并且对于树上任意一个结点，其上的数值必大于等于其左子树上任意结点数值，必小于等于其右子树上任意结点的数值。  建树思路对二叉排序树插入数字x：  若当前树为空，则x为其根结点。 若当前结点大于x，则x插入其左子树；若当前结点小于x，则x插入其右子树；若当前结点等于x，则根据具体情况选择插入左右子树或者直接忽略。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="王道机试第三章《数据结构》——2.哈夫曼树">
-<meta property="og:url" content="https://gknl.github.io/2020/02/06/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%942-%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/index.html">
+<meta property="og:title" content="王道机试第三章《数据结构》——4.二叉排序树">
+<meta property="og:url" content="https://gknl.github.io/2020/02/11/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%944-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91/index.html">
 <meta property="og:site_name" content="钢盔女郎の博客">
-<meta property="og:description" content="前言 使用数据结构堆来辅助求解哈夫曼树，是求哈夫曼树的最佳选择。学会求解哈夫曼树，还要学会在实际运用中确定哈夫曼树模型。最经典的问题模型为哈夫曼编码、多个数的两两合并等。  几个关键概念 路径：  从任意一个结点到达另一个结点的通路。 路径长度：  该路径上所需经过的边的个数。 结点的带权路径长度：  从根结点到达该节点的路径长度再乘以该结点权值。 树的带权路径长度和：  树所有的叶子结点的带权路">
-<meta property="og:image" content="https://gknl.github.io/2020/02/06/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%942-%E5%93%88%E5%A4%AB%E6%9B%BC/pasted-0.png">
-<meta property="article:published_time" content="2020-02-06T11:24:23.000Z">
-<meta property="article:modified_time" content="2020-02-06T12:00:28.030Z">
+<meta property="og:description" content="前言定义 二叉排序树（亦即二叉搜索树）是一颗二叉树，并且对于树上任意一个结点，其上的数值必大于等于其左子树上任意结点数值，必小于等于其右子树上任意结点的数值。  建树思路对二叉排序树插入数字x：  若当前树为空，则x为其根结点。 若当前结点大于x，则x插入其左子树；若当前结点小于x，则x插入其右子树；若当前结点等于x，则根据具体情况选择插入左右子树或者直接忽略。">
+<meta property="og:image" content="https://gknl.github.io/2020/02/11/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%944-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F/pasted-0.png">
+<meta property="article:published_time" content="2020-02-11T15:33:00.000Z">
+<meta property="article:modified_time" content="2020-02-11T16:40:59.775Z">
 <meta property="article:author" content="PM">
+<meta property="article:tag" content="机试">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gknl.github.io/2020/02/06/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%942-%E5%93%88%E5%A4%AB%E6%9B%BC/pasted-0.png">
+<meta name="twitter:image" content="https://gknl.github.io/2020/02/11/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%944-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F/pasted-0.png">
 
-<link rel="canonical" href="https://gknl.github.io/2020/02/06/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%942-%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/">
+<link rel="canonical" href="https://gknl.github.io/2020/02/11/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%944-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91/">
 
 
 <script id="page-configurations">
@@ -75,7 +77,7 @@
   };
 </script>
 
-  <title>王道机试第三章《数据结构》——2.哈夫曼树 | 钢盔女郎の博客</title>
+  <title>王道机试第三章《数据结构》——4.二叉排序树 | 钢盔女郎の博客</title>
   
 
 
@@ -215,7 +217,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://gknl.github.io/2020/02/06/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%942-%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/">
+    <link itemprop="mainEntityOfPage" href="https://gknl.github.io/2020/02/11/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%944-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/headImage.jpeg">
@@ -228,7 +230,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          王道机试第三章《数据结构》——2.哈夫曼树
+          王道机试第三章《数据结构》——4.二叉排序树
         </h1>
 
         <div class="post-meta">
@@ -237,9 +239,26 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-02-06 19:24:23 / 修改时间：20:00:28" itemprop="dateCreated datePublished" datetime="2020-02-06T19:24:23+08:00">2020-02-06</time>
+              <time title="创建时间：2020-02-11 23:33:00" itemprop="dateCreated datePublished" datetime="2020-02-11T23:33:00+08:00">2020-02-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-12 00:40:59" itemprop="dateModified" datetime="2020-02-12T00:40:59+08:00">2020-02-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%8E%8B%E9%81%93%E8%80%83%E7%A0%94%E6%9C%BA%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">王道考研机试</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -258,8 +277,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/02/06/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%942-%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/06/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%942-%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/02/11/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%944-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/11/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%944-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -269,14 +288,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.7k</span>
+              <span>1.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -288,30 +307,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
-<p>使用数据结构<font color=#FF0000>堆</font>来辅助求解哈夫曼树，是求哈夫曼树的最佳选择。<br>学会求解哈夫曼树，还要学会在实际运用中确定哈夫曼树模型。<br>最经典的问题模型为<strong>哈夫曼编码</strong>、<strong>多个数的两两合并</strong>等。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<p><font color=#FF0000>二叉排序树（亦即二叉搜索树）</font>是一颗二叉树，并且对于树上任意一个结点，其上的数值必<strong>大于等于</strong>其<u>左子树</u>上任意结点数值，必<strong>小于等于</strong>其<u>右子树</u>上任意结点的数值。</p>
 </blockquote>
-<h2 id="几个关键概念"><a href="#几个关键概念" class="headerlink" title="几个关键概念"></a>几个关键概念</h2><ul>
-<li><strong>路径</strong>：<br>  从任意一个结点到达另一个结点的通路。</li>
-<li><strong>路径长度</strong>：<br>  该路径上所需经过的边的个数。</li>
-<li><strong>结点的带权路径长度</strong>：<br>  从根结点到达该节点的路径长度再乘以该结点权值。</li>
-<li><strong>树的带权路径长度和</strong>：<br>  树所有的叶子结点的带权路径长度和。</li>
-<li><strong>哈夫曼树(最优树)</strong>：<br>  给定n个结点和它们的权值，以它们为叶子结点构造一棵带权路径和最小的二叉树。</li>
-</ul>
-<a id="more"></a>
-
-<h2 id="哈夫曼树求法"><a href="#哈夫曼树求法" class="headerlink" title="哈夫曼树求法"></a>哈夫曼树求法</h2><ol>
-<li>将所有结点放入集合K。</li>
-<li>若集合K中剩余结点大于2个，则取出其中<font color=#FF0000>权值最小</font>的两个结点，构造他们同时为某个新节点的左右儿子，该新节点是他们共同的双亲结点，设定它的权值为其两个儿子结点的<strong>权值和</strong>。并将该父亲结点放入集合K。重复步骤2或3。</li>
-<li>若集合K中仅剩余一个结点，该结点即为构造出的哈夫曼树数的根结点，<strong>所有构造得到的中间结点(即哈夫曼树上非叶子结点，<u>包括根节点</u>)的权值和</strong>即为该哈夫曼树的<strong>带权路径和</strong>。</li>
+<h2 id="建树思路"><a href="#建树思路" class="headerlink" title="建树思路"></a>建树思路</h2><p>对二叉排序树插入数字x：</p>
+<ol>
+<li>若当前树为空，则x为其根结点。</li>
+<li>若当前结点大于x，则x插入其左子树；若当前结点小于x，则x插入其右子树；若当前结点等于x，则根据具体情况选择插入左右子树或者直接忽略。</li>
 </ol>
-<h2 id="辅助工具"><a href="#辅助工具" class="headerlink" title="辅助工具"></a>辅助工具</h2><p>为了方便快捷高效率的求得集合K中权值最小的两个元素，我们需要使用<a href="https://www.cnblogs.com/lanhaicode/p/10546257.html" target="_blank" rel="noopener"><strong><font color=#FF0000>堆</font>数据结构</strong></a>。它可以以O（logn）的复杂度取得n个元素中的最小元素。为了绕过对堆的实现，我们使用标准模板库中的相应的标准模板——<strong>优先队列</strong>。<br>它的定义与之前我们使用过的队列一样在标准模板库queue中，在使用它之前必须做相应预处理。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br></pre></td></tr></table></figure>
-<p>利用语句<code>priority_queue&lt;int&gt; Q;</code>建立一个保存元素为int的堆Q，<br>但是请特别注意这样建立的堆其默认为<u>大顶堆</u>，即我们从堆顶取得的元素为整个堆中最大的元素。<br>而在求哈夫曼树中，我们恰恰需要取得堆中最小的元素，于是我们使用如下语句定义一个<strong>小顶堆</strong>：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这里greater是指定的比较函数，默认为less(大顶堆)</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span> , <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; , greater&lt;<span class="keyword">int</span>&gt; &gt; Q;</span><br></pre></td></tr></table></figure>
-<p>关于堆的有关操作如下：<br><code>Q.push(x);</code><br>将元素x放入堆Q中。<br><code>int a = Q.top();</code><br>取出堆顶元素，即最小的元素保存在a中。<br><code>Q.pop();</code><br>弹出堆顶元素，取出后堆会自动调整为一个新的小顶堆。</p>
-<h1 id="例3-3-哈夫曼树"><a href="#例3-3-哈夫曼树" class="headerlink" title="例3.3 哈夫曼树"></a>例3.3 哈夫曼树</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p><img src="/2020/02/06/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%942-%E5%93%88%E5%A4%AB%E6%9B%BC/pasted-0.png" alt="玖涯博客"></p>
-<h2 id="C-代码"><a href="#C-代码" class="headerlink" title="C++代码"></a>C++代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Created by PM on 2020/2/6 19:49</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="comment">//建立一个小顶堆</span></span><br><span class="line"><span class="comment">//这里greater是指定的比较函数，默认为less(大顶堆)</span></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span> , <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; , greater&lt;<span class="keyword">int</span>&gt; &gt; Q;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span> (<span class="string">"%d"</span>,&amp;n) != EOF) &#123;</span><br><span class="line">        <span class="keyword">while</span>(Q.empty() == <span class="literal">false</span>) Q.pop(); <span class="comment">//清空堆中元素</span></span><br><span class="line">        <span class="comment">//输入n个叶子结点权值</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i ++) &#123; </span><br><span class="line">            <span class="keyword">int</span> x;</span><br><span class="line">            <span class="built_in">scanf</span> (<span class="string">"%d"</span>,&amp;x);</span><br><span class="line">            Q.push(x); <span class="comment">//将权值放入堆中</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>; <span class="comment">//保存答案</span></span><br><span class="line">        <span class="keyword">while</span>(Q.size() &gt; <span class="number">1</span>) &#123; <span class="comment">//当堆中元素大于1个</span></span><br><span class="line">            <span class="keyword">int</span> a = Q.top();</span><br><span class="line">            Q.pop();</span><br><span class="line">            <span class="keyword">int</span> b = Q.top();</span><br><span class="line">            Q.pop(); <span class="comment">//取出堆中两个最小元素,他们为同一个结点的左右儿子,且该双亲结点的权值为它们的和</span></span><br><span class="line">            ans += a + b; <span class="comment">//该父亲结点必为非叶子结点,固累加其权值</span></span><br><span class="line">            Q.push(a + b); <span class="comment">//将该双亲结点的权值放回堆中</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans); <span class="comment">//输出答案</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
+<li>不同的插入顺序可能得到不同的二叉排序树形态</li>
+<li>若对二叉排序树进行中序遍历，那么其遍历结果必然是一个递增序列。<br>  因此，通过建立二叉排序树就能对原无序序列<strong>进行排序</strong>，并实现动态维护。</li>
+</ul>
+<h1 id="C-代码：建立二叉排序树"><a href="#C-代码：建立二叉排序树" class="headerlink" title="C++代码：建立二叉排序树"></a>C++代码：建立二叉排序树</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Created by PM on 2020/2/12 0:27</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="function">Node *<span class="title">Insert</span><span class="params">(Node *T,<span class="keyword">int</span> x)</span> </span>&#123; <span class="comment">//插入数字</span></span><br><span class="line">    <span class="keyword">if</span> (T == <span class="literal">NULL</span>) &#123; <span class="comment">//若当前树为空</span></span><br><span class="line">        T = creat(); <span class="comment">//建立结点</span></span><br><span class="line">        T -&gt; c = x; <span class="comment">//数字直接插入其根结点</span></span><br><span class="line">        <span class="keyword">return</span> T; <span class="comment">//返回根结点指针</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (x &lt; T-&gt;c) <span class="comment">//若x小于根结点数值</span></span><br><span class="line">        T -&gt; lchild = Insert(T -&gt; lchild,x); <span class="comment">//插入到左子树上</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (x &gt; T-&gt;c) <span class="comment">// 若x大于根结点数值</span></span><br><span class="line">        T -&gt; rchild = Insert(T -&gt; rchild,x); <span class="comment">//插入到右子树上.若根结点数值与x一样,根据题目要求直接忽略</span></span><br><span class="line">    <span class="keyword">return</span> T; <span class="comment">//返回根节点指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="如何判断两颗二叉树是否相同？"><a href="#如何判断两颗二叉树是否相同？" class="headerlink" title="如何判断两颗二叉树是否相同？"></a>如何判断两颗二叉树是否相同？</h1><p>由于<strong>一种遍历顺序并不能唯一的确定一棵二叉树</strong>，所以两棵不同的树的某一种遍历顺序是<em>可能相同</em>的。</p>
+<blockquote>
+<p><font color=#FF0000><strong>包括中序遍历在内</strong>的两种遍历结果可以唯一得确定一棵二叉树</font>。<br>我们只需对两棵树进行包括中序遍历在内的两种遍历，若两种遍历的结果都相同，那么就可以判定两棵树是完全相同的。</p>
+</blockquote>
+<h1 id="二叉排序树结点的删除"><a href="#二叉排序树结点的删除" class="headerlink" title="二叉排序树结点的删除"></a>二叉排序树结点的删除</h1><p><a href="https://www.cnblogs.com/alantu2018/p/8471854.html" target="_blank" rel="noopener">分为以下三种情况</a>：</p>
+<blockquote>
+<ol>
+<li>要删除的是叶子结点：<br> 直接删除即可。</li>
+<li>要删除的结点只有左子树或只有右子树：<br> 将它的左子树或右子树整个移动到删除结点的位置即可。</li>
+<li>要删除的结点既有左子树又有右子树：<br> 找到需要删除的结点p的直接前驱（或直接后继）s，用s来替换结点p，然后再删除此结点s<br> 注意：这里的前驱和后继是指中序遍历时的顺序。<br>如下图所示</li>
+</ol>
+</blockquote>
+<p><img src="/2020/02/11/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%944-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F/pasted-0.png" alt="玖涯博客"></p>
+<h1 id="本章总结"><a href="#本章总结" class="headerlink" title="本章总结"></a>本章总结</h1><p>本章主要讨论机试中有关数据结构的相关问题，主要涉及栈的两个应用——括号匹配和表达式求值、哈夫曼树的建立、二叉树和二叉排序树的相关操作。<br>数据结构在机试中考察的难度不大，牢记几个经典数据结构的应用和实现即可。</p>
 
     </div>
 
@@ -340,6 +363,10 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E8%AF%95/" rel="tag"># 机试</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
 
         
 
@@ -347,13 +374,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/06/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%941-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/" rel="prev" title="王道机试第三章《数据结构》——1.栈的应用">
-      <i class="fa fa-chevron-left"></i> 王道机试第三章《数据结构》——1.栈的应用
+    <a href="/2020/02/07/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%943-%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="prev" title="王道机试第三章《数据结构》——3.二叉树">
+      <i class="fa fa-chevron-left"></i> 王道机试第三章《数据结构》——3.二叉树
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/02/07/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%943-%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="next" title="王道机试第三章《数据结构》——3.二叉树">
-      王道机试第三章《数据结构》——3.二叉树 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -414,7 +438,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#几个关键概念"><span class="nav-number">1.1.</span> <span class="nav-text">几个关键概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈夫曼树求法"><span class="nav-number">1.2.</span> <span class="nav-text">哈夫曼树求法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#辅助工具"><span class="nav-number">1.3.</span> <span class="nav-text">辅助工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例3-3-哈夫曼树"><span class="nav-number">2.</span> <span class="nav-text">例3.3 哈夫曼树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-代码"><span class="nav-number">2.2.</span> <span class="nav-text">C++代码</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建树思路"><span class="nav-number">1.2.</span> <span class="nav-text">建树思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特点"><span class="nav-number">1.3.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-代码：建立二叉排序树"><span class="nav-number">2.</span> <span class="nav-text">C++代码：建立二叉排序树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何判断两颗二叉树是否相同？"><span class="nav-number">3.</span> <span class="nav-text">如何判断两颗二叉树是否相同？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉排序树结点的删除"><span class="nav-number">4.</span> <span class="nav-text">二叉排序树结点的删除</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本章总结"><span class="nav-number">5.</span> <span class="nav-text">本章总结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>王道机试第三章《数据结构》——4.二叉排序树</title>
+      <link href="/2020/02/11/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%944-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91/"/>
+      <url>/2020/02/11/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%944-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91/</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote><p><font color=#FF0000>二叉排序树（亦即二叉搜索树）</font>是一颗二叉树，并且对于树上任意一个结点，其上的数值必<strong>大于等于</strong>其<u>左子树</u>上任意结点数值，必<strong>小于等于</strong>其<u>右子树</u>上任意结点的数值。</p></blockquote><h2 id="建树思路"><a href="#建树思路" class="headerlink" title="建树思路"></a>建树思路</h2><p>对二叉排序树插入数字x：</p><ol><li>若当前树为空，则x为其根结点。</li><li>若当前结点大于x，则x插入其左子树；若当前结点小于x，则x插入其右子树；若当前结点等于x，则根据具体情况选择插入左右子树或者直接忽略。</li></ol><a id="more"></a><h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul><li>不同的插入顺序可能得到不同的二叉排序树形态</li><li>若对二叉排序树进行中序遍历，那么其遍历结果必然是一个递增序列。<br>  因此，通过建立二叉排序树就能对原无序序列<strong>进行排序</strong>，并实现动态维护。</li></ul><h1 id="C-代码：建立二叉排序树"><a href="#C-代码：建立二叉排序树" class="headerlink" title="C++代码：建立二叉排序树"></a>C++代码：建立二叉排序树</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Created by PM on 2020/2/12 0:27</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="function">Node *<span class="title">Insert</span><span class="params">(Node *T,<span class="keyword">int</span> x)</span> </span>&#123; <span class="comment">//插入数字</span></span><br><span class="line">    <span class="keyword">if</span> (T == <span class="literal">NULL</span>) &#123; <span class="comment">//若当前树为空</span></span><br><span class="line">        T = creat(); <span class="comment">//建立结点</span></span><br><span class="line">        T -&gt; c = x; <span class="comment">//数字直接插入其根结点</span></span><br><span class="line">        <span class="keyword">return</span> T; <span class="comment">//返回根结点指针</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (x &lt; T-&gt;c) <span class="comment">//若x小于根结点数值</span></span><br><span class="line">        T -&gt; lchild = Insert(T -&gt; lchild,x); <span class="comment">//插入到左子树上</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (x &gt; T-&gt;c) <span class="comment">// 若x大于根结点数值</span></span><br><span class="line">        T -&gt; rchild = Insert(T -&gt; rchild,x); <span class="comment">//插入到右子树上.若根结点数值与x一样,根据题目要求直接忽略</span></span><br><span class="line">    <span class="keyword">return</span> T; <span class="comment">//返回根节点指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="如何判断两颗二叉树是否相同？"><a href="#如何判断两颗二叉树是否相同？" class="headerlink" title="如何判断两颗二叉树是否相同？"></a>如何判断两颗二叉树是否相同？</h1><p>由于<strong>一种遍历顺序并不能唯一的确定一棵二叉树</strong>，所以两棵不同的树的某一种遍历顺序是<em>可能相同</em>的。</p><blockquote><p><font color=#FF0000><strong>包括中序遍历在内</strong>的两种遍历结果可以唯一得确定一棵二叉树</font>。<br>我们只需对两棵树进行包括中序遍历在内的两种遍历，若两种遍历的结果都相同，那么就可以判定两棵树是完全相同的。</p></blockquote><h1 id="二叉排序树结点的删除"><a href="#二叉排序树结点的删除" class="headerlink" title="二叉排序树结点的删除"></a>二叉排序树结点的删除</h1><p><a href="https://www.cnblogs.com/alantu2018/p/8471854.html" target="_blank" rel="noopener">分为以下三种情况</a>：</p><blockquote><ol><li>要删除的是叶子结点：<br> 直接删除即可。</li><li>要删除的结点只有左子树或只有右子树：<br> 将它的左子树或右子树整个移动到删除结点的位置即可。</li><li>要删除的结点既有左子树又有右子树：<br> 找到需要删除的结点p的直接前驱（或直接后继）s，用s来替换结点p，然后再删除此结点s<br> 注意：这里的前驱和后继是指中序遍历时的顺序。<br>如下图所示</li></ol></blockquote><p><img src="/2020/02/11/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%944-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F/pasted-0.png" alt="玖涯博客"></p><h1 id="本章总结"><a href="#本章总结" class="headerlink" title="本章总结"></a>本章总结</h1><p>本章主要讨论机试中有关数据结构的相关问题，主要涉及栈的两个应用——括号匹配和表达式求值、哈夫曼树的建立、二叉树和二叉排序树的相关操作。<br>数据结构在机试中考察的难度不大，牢记几个经典数据结构的应用和实现即可。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 王道考研机试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 机试 </tag>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>王道机试第三章《数据结构》——3.二叉树</title>
       <link href="/2020/02/07/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%943-%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
       <url>/2020/02/07/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%943-%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
