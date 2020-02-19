@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/polardb.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/polardb.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/polardb.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="QDK1R1zUVUQzV5bHVQblZqnw-dHV6smKnoO0csfEhik">
+  <meta name="baidu-site-verification" content="QHwpbaZPVp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://gknl.github.io').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},
+    copycode: {"enable":false,"show_result":false,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: './public/search.xml',
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="写在前面前言 本节中所讨论的并查集使用到的数据结构为数组  这种数据结构用来表示集合信息，用以实现如  确定某个集合含有哪些元素 判断某两个元素是否存在同一个集合中 求集合中元素的数量  等问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="王道机试第五章《图论》——2.并查集">
+<meta property="og:url" content="https://gknl.github.io/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5%E9%9B%86/index.html">
+<meta property="og:site_name" content="钢盔女郎の博客">
+<meta property="og:description" content="写在前面前言 本节中所讨论的并查集使用到的数据结构为数组  这种数据结构用来表示集合信息，用以实现如  确定某个集合含有哪些元素 判断某两个元素是否存在同一个集合中 求集合中元素的数量  等问题。">
+<meta property="og:image" content="https://gknl.github.io/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5/pasted-0.png">
+<meta property="og:image" content="https://gknl.github.io/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5/pasted-1.png">
+<meta property="og:image" content="https://gknl.github.io/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5/pasted-2.png">
+<meta property="og:image" content="https://gknl.github.io/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5/pasted-3.png">
+<meta property="og:image" content="https://gknl.github.io/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5/pasted-4.png">
+<meta property="article:published_time" content="2020-02-19T14:12:00.000Z">
+<meta property="article:modified_time" content="2020-02-19T16:12:02.022Z">
+<meta property="article:author" content="PM">
+<meta property="article:tag" content="机试">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gknl.github.io/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5/pasted-0.png">
+
+<link rel="canonical" href="https://gknl.github.io/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5%E9%9B%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>王道机试第五章《图论》——2.并查集 | 钢盔女郎の博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">钢盔女郎の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">PM</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">1</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://gknl.github.io/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/headImage.jpeg">
+      <meta itemprop="name" content="PM">
+      <meta itemprop="description" content="菜鸡博客,记录生活">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="钢盔女郎の博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          王道机试第五章《图论》——2.并查集
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-19 22:12:00" itemprop="dateCreated datePublished" datetime="2020-02-19T22:12:00+08:00">2020-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-20 00:12:02" itemprop="dateModified" datetime="2020-02-20T00:12:02+08:00">2020-02-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%8E%8B%E9%81%93%E8%80%83%E7%A0%94%E6%9C%BA%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">王道考研机试</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5%E9%9B%86/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5%E9%9B%86/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>本节中所讨论的<strong>并查集</strong>使用到的数据结构为<font color=#FF0000>数组</font></p>
+</blockquote>
+<p>这种数据结构用来表示集合信息，用以实现如</p>
+<ul>
+<li>确定<strong>某个集合含有哪些元素</strong></li>
+<li>判断某两个元素<strong>是否存在同一个集合中</strong></li>
+<li>求集合中<strong>元素的数量</strong></li>
+</ul>
+<p>等问题。</p>
+<a id="more"></a>
+
+<h1 id="双亲节点表示法"><a href="#双亲节点表示法" class="headerlink" title="双亲节点表示法"></a>双亲节点表示法</h1><p>我们用一棵树上的结点来表示在一个集合中的数字，要判断两个数字是否在一个集合中，我们只需判断它们<u>是否在同一棵树中</u>。<br>那么我们使用<strong>双亲结点表示法</strong>来表示一棵树，即<font color=#FF0000>每个结点保存其双亲结点</font>。若用数组来表示该树，则得到如下结果：</p>
+<p><img src="/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5/pasted-0.png" alt="玖涯博客"><br>我们在数组单元i中保存<strong>结点i的双亲结点编号</strong>，若该结点已经是<em>根结点</em>则其双亲结点信息保存为<strong>-1</strong>。</p>
+<blockquote>
+<p>有了这样的存储结构，我们就能通过<strong>不断地求双亲结点来找到该结点所在树的根结点</strong></p>
+</blockquote>
+<p>若两个元素所在树的<strong>根结点相同</strong>，则可以判定它们<font color=#FF0000>在同一棵树上</font>，它们同属一个集合。</p>
+<h1 id="合并两个集合"><a href="#合并两个集合" class="headerlink" title="合并两个集合"></a>合并两个集合</h1><p>合并两个集合，只需要让分别代表两个集合的两棵树合并，合并方法为<strong>其中一棵树变为另一棵树根结点的子树</strong>，如下图所示：</p>
+<p><img src="/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5/pasted-1.png" alt="玖涯博客"><br>如图，若我们对2所在的集合与0所在的集合合并，则先找到表示2所在集合的树的根结点1和表示0所在集合的树的根结点4，<strong>并使其中之一（图中为4）为另一个根结点的儿子结点</strong>，这样其中一棵树变为另一棵树根结点的一棵新子树，完成合并。<br>在双亲结点表示法中，该合并过程为：</p>
+<p><img src="/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5/pasted-2.png" alt="玖涯博客"></p>
+<blockquote>
+<p>在树的双亲结点表示法中，两树的合并即表示为<strong>其中一棵树的根节的双亲结点变为<u>另一棵树</u>的根结点</strong>。</p>
+</blockquote>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>首先，我们定义一个数组，用双亲表示法来表示各棵树（所有的集合元素个数总和为N）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> Tree[N];</span><br></pre></td></tr></table></figure>
+<p>用Tree[i]来表示结点i的双亲结点，若Tree[i]为-1则表示该结点不存在双亲结点，即结点i为其所在树的根结点。<br>那么，为了查找结点x所在树的根结点，我们可以通过两种方式定义findRoot函数：</p>
+<ol>
+<li><strong>递归</strong>形式（常用）<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findRoot</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (Tree[x] == <span class="number">-1</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> x; <span class="comment">//若当前结点为根结点则返回该结点号</span></span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> findRoot(Tree[x]); <span class="comment">//否则递归查找其双亲结点的根结点</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>非递归</strong>形式<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findRoot</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> ret;</span><br><span class="line">  <span class="keyword">while</span> (Tree[x] != <span class="number">-1</span>)</span><br><span class="line">  	x = Tree[x]; <span class="comment">//若当前结点为非根结点则一直查找其双亲结点</span></span><br><span class="line">  ret = x; <span class="comment">//返回根结点编号</span></span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+但是，采用这种策略而不加以任何约束,可能导致的后果是：<blockquote>
+<p><strong>树高</strong>会随着集合之间的合并而不断地增加，查找根结点的耗时逐渐增大，极端情况下该树可能会退化成一个<u>单链表</u>。</p>
+</blockquote>
+</li>
+</ol>
+<p>在这种情况下，我们引入了<font color=#FF0000><strong>“路径压缩”</strong></font>这一优化方法。</p>
+<h1 id="路径压缩"><a href="#路径压缩" class="headerlink" title="路径压缩"></a>路径压缩</h1><p>为了避免因为树的退化而产生额外的时间消耗，使其尽可能的保持较低的树高，<br>在合并两棵树的过程中，我们可以在<strong>查找某个特定结点的根结点时</strong>，同时将其与根结点之间<strong>所有的结点</strong>都<font color=#FF0000>直接指向根结点</font>，这个过程被称为<strong>路径压缩</strong>。</p>
+<p><img src="/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5/pasted-3.png" alt="玖涯博客"></p>
+<h2 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h2><p>修改以上所给的（两种）函数分别为：</p>
+<ol>
+<li><strong>递归</strong>：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findRoot</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (Tree[x] == <span class="number">-1</span>) <span class="keyword">return</span> x;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">int</span> tmp = findRoot(Tree[x]);</span><br><span class="line">    Tree[x] = tmp; <span class="comment">//将当前结点的双亲结点设置为查找返回的根结点编号</span></span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>非递归</strong>：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findRoot</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> ret;</span><br><span class="line">  <span class="keyword">int</span> tmp = x;</span><br><span class="line">  <span class="keyword">while</span> (Tree[x] != <span class="number">-1</span>)&#123;</span><br><span class="line">  	x = Tree[x];</span><br><span class="line">  &#125;</span><br><span class="line">  ret = x;</span><br><span class="line">  x = tmp; <span class="comment">//再做一次从结点x到根结点的遍历</span></span><br><span class="line">  <span class="keyword">while</span>(Tree[x] != <span class="number">-1</span>) &#123;</span><br><span class="line">    <span class="keyword">int</span> t = Tree[x];</span><br><span class="line">    Tree[x] = ret;</span><br><span class="line">    x = t; <span class="comment">//遍历过程中将这些结点的双亲结点都设置为已经查找得到的根结点编号</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="例5-1-畅通工程"><a href="#例5-1-畅通工程" class="headerlink" title="例5.1 畅通工程"></a>例5.1 畅通工程</h1><blockquote>
+<p>考察点：<font color=#FF0000>使用并查集求图中连通分量个数（即图中有几个集合）</font></p>
+</blockquote>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
+<p><strong>某省调查城镇交通状况，得到现有城镇道路统计表，表中列出了每条道路直接连通的城镇。省政府“畅通工程”的目标是使全省任何两个城镇间都可以实现交通（但不一定有直接的道路相连，只要互相间接通过道路可达即可）。问最少还需要建设多少条道路？</strong></p>
+</blockquote>
+<p><img src="/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5/pasted-4.png" alt="玖涯博客"></p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>该问题可以被抽象成在一个<strong>图上查找连通分量</strong>（彼此连通的结点集合）的个数，我们只需求得连通分量的个数，就能得到答案（新建多少条边来将这些连通分量连通）。</p>
+<blockquote>
+<p>这个问题可以使用<strong>并查集</strong>完成，初始时，每个结点都是孤立的连通分量，当读入已经建成的边后，我们将边的两个顶点所在集合合并，表示这两个集合中的所有结点已经连通。对所有的边重复该操作。</p>
+</blockquote>
+<p><strong>最后计算所有的结点被保存在几个集合中</strong>，即存在多少棵树就能得知共有多少个连通分量（集合）。</p>
+<h2 id="C-代码"><a href="#C-代码" class="headerlink" title="C++代码"></a>C++代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Created by PM on 2020/2/19 23:58</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 1000</span></span><br><span class="line"><span class="keyword">int</span> Tree[N];</span><br><span class="line"><span class="comment">//查找某个结点所在树的根结点（！固定写法，牢记！！！）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findRoot</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (Tree[x] == <span class="number">-1</span>) <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = findRoot(Tree[x]);</span><br><span class="line">        Tree[x] = tmp;<span class="comment">//路径压缩优化</span></span><br><span class="line">        <span class="keyword">return</span> tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n , m;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span> (<span class="string">"%d"</span>,&amp;n) != EOF &amp;&amp; n != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">scanf</span> (<span class="string">"%d"</span>,&amp;m);</span><br><span class="line">        <span class="comment">//初始化Tree数组中每个元素为-1</span></span><br><span class="line">        <span class="comment">//因为初始时,所有结点都是孤立的集合,即其所在集合只有一个结点,其本身就是所在树根结点</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i ++)&#123;</span><br><span class="line">            Tree[i] = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//读入边信息</span></span><br><span class="line">        <span class="keyword">while</span>(m -- != <span class="number">0</span>) &#123; </span><br><span class="line">            <span class="keyword">int</span> a , b;</span><br><span class="line">            <span class="built_in">scanf</span> (<span class="string">"%d%d"</span>,&amp;a,&amp;b);</span><br><span class="line">            a = findRoot(a);</span><br><span class="line">            b = findRoot(b); <span class="comment">//查找边的两个顶点所在集合信息</span></span><br><span class="line">            <span class="keyword">if</span> (a != b) Tree[a] = b; <span class="comment">//若两个顶点不在同一个集合则合并这两个集合!!!</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//统计所有结点中根结点的个数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Tree[i] == <span class="number">-1</span>) ans ++; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans - <span class="number">1</span>); <span class="comment">//答案即为在ans个集合间再修建ans-1条道路即可使所有结点连通</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="例5-2-More-is-better"><a href="#例5-2-More-is-better" class="headerlink" title="例5.2 More is better"></a>例5.2 More is better</h1><blockquote>
+<p>考察点：<font color=#FF0000>使用并查集计算图中节点最多的树有多少个节点（即找到最大的集合，并计算集合大小）。</font></p>
+</blockquote>
+<h2 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
+<p><strong>有10000000个小朋友，他们之中有N对好朋友，且朋友关系具有传递性：若A与B是朋友，B与C是朋友，那么我们也认为A与C是朋友。<br>在给出这N对朋友关系后，要求我们找出一个最大（人数最多）的集合，该集合中任意两人之间都是朋友或者该集合中只有一个人，<em>输出该最大人数</em>。</strong></p>
+</blockquote>
+<h2 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h2><p>为了计算每个集合的元素个数，我们不妨在表示<strong>每个集合的树的根结点</strong>记录该集合所包含的元素个数，在<strong>合并时累加</strong>被合并两个集合包含的元素个数。<br>最后，找出所有集合中所包含<strong>元素最多</strong>的集合即是所求。</p>
+<h2 id="C-代码-1"><a href="#C-代码-1" class="headerlink" title="C++代码"></a>C++代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Created by PM on 2020/2/20 0:05</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 10000001</span></span><br><span class="line"><span class="keyword">int</span> Tree[N];</span><br><span class="line"><span class="comment">//查找结点x所在树的根结点(固定写法)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findRoot</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (Tree[x] == <span class="number">-1</span>) <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = findRoot(Tree[x]);</span><br><span class="line">        Tree[x] = tmp;<span class="comment">//路径压缩优化</span></span><br><span class="line">        <span class="keyword">return</span> tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> sum[N]; <span class="comment">//用sum[i]表示以结点i为根的树的结点个数,其中保存数据仅当Tree[i]为-1即该结点为树的根结点时有效</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span> (<span class="string">"%d"</span>,&amp;n) != EOF) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt; N;i ++) &#123; <span class="comment">//初始化结点信息</span></span><br><span class="line">            Tree[i] = <span class="number">-1</span>; <span class="comment">//所有结点为孤立集合</span></span><br><span class="line">            sum[i] = <span class="number">1</span>; <span class="comment">//所有集合的元素个数为1</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(n -- != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> a , b;</span><br><span class="line">            <span class="built_in">scanf</span> (<span class="string">"%d%d"</span>,&amp;a,&amp;b);</span><br><span class="line">            a = findRoot(a);</span><br><span class="line">            b = findRoot(b);</span><br><span class="line">            <span class="keyword">if</span> (a != b) &#123;</span><br><span class="line">                Tree[a] = b;</span><br><span class="line">                sum[b] += sum[a]; <span class="comment">//合并两集时,将成为子树的树的根结点上保存的该集合元素个数的数字累加到合并后新树的树根</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">1</span>;<span class="comment">//答案,答案至少为1。固这里先出初始化为1</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= N;i ++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (Tree[i] == <span class="number">-1</span> &amp;&amp; sum[i] &gt; ans) ans = sum[i]; <span class="comment">//统计最大值</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans); <span class="comment">//输出</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从本例中应该得到启发:</p>
+<blockquote>
+<p>我们在使用并查集的同时也可以在表示集合的<strong>树的根结点</strong><font color=#0000FF>保存其它额外信息</font>，并且在集合合并的过程中维护该值，以便于求解某些集合问题。</p>
+</blockquote>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>就我个人现阶段刷题经历来讲，感觉并查集在“图”一类的题中在用处相当大。<br>以Leetcode上<a href="https://leetcode-cn.com/problems/number-of-islands/" target="_blank" rel="noopener"><strong>200.岛屿数量</strong></a>为例，虽然看了半天才有思路，但是我的第一想法就是使用并查集来找出图中的连通分量个数，每个联通分量即为一个岛屿。<br>当然使用BFS和DFS来做也能够解出答案，而且好像更简洁（？）<br>不管，反正并查集是个好东西！</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="PM 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="PM 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E8%AF%95/" rel="tag"># 机试</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/12/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%941-%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8/" rel="prev" title="王道机试第五章《图论》——1.图的存储">
+      <i class="fa fa-chevron-left"></i> 王道机试第五章《图论》——1.图的存储
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#双亲节点表示法"><span class="nav-number">3.</span> <span class="nav-text">双亲节点表示法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#合并两个集合"><span class="nav-number">4.</span> <span class="nav-text">合并两个集合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">4.1.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路径压缩"><span class="nav-number">5.</span> <span class="nav-text">路径压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现-1"><span class="nav-number">5.1.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例5-1-畅通工程"><span class="nav-number">6.</span> <span class="nav-text">例5.1 畅通工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">6.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路"><span class="nav-number">6.2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-代码"><span class="nav-number">6.3.</span> <span class="nav-text">C++代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例5-2-More-is-better"><span class="nav-number">7.</span> <span class="nav-text">例5.2 More is better</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述-1"><span class="nav-number">7.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解题思路-1"><span class="nav-number">7.2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-代码-1"><span class="nav-number">7.3.</span> <span class="nav-text">C++代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最后"><span class="nav-number">7.4.</span> <span class="nav-text">写在最后</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="PM"
+      src="/images/headImage.jpeg">
+  <p class="site-author-name" itemprop="name">PM</p>
+  <div class="site-description" itemprop="description">菜鸡博客,记录生活</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button motion-element">
+    <a onclick="tidioChatApi.open();"><i class="fa fa-comment"></i>
+    Chat
+  </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/GKNL" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;GKNL" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/p/1005055407797948" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;p&#x2F;1005055407797948" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/174736231" title="豆瓣 → https:&#x2F;&#x2F;www.douban.com&#x2F;people&#x2F;174736231" rel="noopener" target="_blank"><i class="fa fa-fw fa-film"></i>豆瓣</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">PM</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">30k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">27 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.7.0
+  </div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  <script src="//code.tidio.co/f3sywhcpt4zyg236jgrfp0lip9hatdlc.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: false,
+      appId: 'mVCwf8GoBdypxm3OvgECOoTX-gzGzoHsz',
+      appKey: 'OvvQXJ2N7WL2df5pMrOyVNLC',
+      placeholder: "Please comment here ^_^",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: false,
+      lang: '' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+  
+	<!-- weather -->
+	<script type="text/javascript">
+	WIDGET = {FID: 'jvFer2ULXH'}
+	</script>
+	<script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
