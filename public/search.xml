@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Pix2pix项目（Keras）环境配置步骤指导说明</title>
+      <link href="/2020/05/04/ix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4%E6%98%8E/"/>
+      <url>/2020/05/04/ix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4%E6%98%8E/</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong><font color=#FF0000>本文章记录了本人在深度学习课程大作业过程中，整个环境的配置过程步骤。</font></strong></p><p>我的项目名称是《基于Pix2pix的建筑标签图像翻译》：</p><blockquote><p>基于深度学习框架Keras，实现Pix2pix图像生成对抗网络，以实现通过建筑语义标签图（以及带建筑的街道语义标签图）生成对应的“真实”建筑图像。</p></blockquote><p><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-1.png" alt="玖涯博客"></p><a id="more"></a><h1 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h1><ul><li>Windows10</li><li>Anaconda3-2020.02-Windows-x86_64</li><li>Pycharm 2019.2.4</li><li>Python 3.6.5</li><li>Tensorflow-gpu 1.12.0</li><li>Keras 2.2.4</li><li>Tensorboard 1.12.2</li><li>Pydot-ng 2.0.0 + pydotplus 2.0.2</li></ul><h1 id="环境搭建步骤"><a href="#环境搭建步骤" class="headerlink" title="环境搭建步骤"></a>环境搭建步骤</h1><h2 id="一、下载Anaconda并安装"><a href="#一、下载Anaconda并安装" class="headerlink" title="一、下载Anaconda并安装"></a>一、下载Anaconda并安装</h2><ol><li><strong>在浏览器中输入 <a href="https://www.anaconda.com/distribution/" target="_blank" rel="noopener">https://www.anaconda.com/distribution/</a> ，需要选择Windows环境下的Python3.7版本，点击图中适合自己的版本，进行下载。</strong><br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-2.png" alt="玖涯博客"></li><li><strong>下载好软件后，双击安装软件</strong><br>①注意软件名称及版本<br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-3.png" alt="玖涯博客">②如出现windows10自带提示，均选择坚持运行（Run）<br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-4.png" alt="玖涯博客">③一步一步进行安装<br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-5.png" alt="玖涯博客"><br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-6.png" alt="玖涯博客"><br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-7.png" alt="玖涯博客"><br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-8.png" alt="玖涯博客">④注意一定要勾选这两个选项（注意：在选择安装文件夹时，所安装的完<br>整路径中都不能有文件夹名称有空格或包含中文字符）<br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-9.png" alt="玖涯博客">点击install即可安装</li><li><strong>配置环境变量</strong><br> 将自己的Python环境变量添加到path下：<br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-10.png" alt="玖涯博客"><br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-11.png" alt="玖涯博客"></li><li><strong>测试Python的安装情况</strong><br> 同时按下电脑 Windows+R 键打开运行窗口，输入 cmd，点击确定。在命令行中键入Python，然后回车，会出现如图的显示：<br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-12.png" alt="玖涯博客"></li><li><strong>安装完毕后，可以在开始菜单中看到如下图标</strong><br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-13.png" alt="玖涯博客"></li></ol><h2 id="二、下载Pycharm并安装"><a href="#二、下载Pycharm并安装" class="headerlink" title="二、下载Pycharm并安装"></a>二、下载Pycharm并安装</h2><ol><li>访问官网 <a href="https://www.jetbrains.com/pycharm/download/" target="_blank" rel="noopener">https://www.jetbrains.com/pycharm/download/</a> ，点击图中适合自己的版本，进行下载。下载完成后，选择安装包进行安装：<br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-14.png" alt="玖涯博客"></li><li>选择安装目录：<br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-15.png" alt="玖涯博客"><br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-16.png" alt="玖涯博客"></li><li>一路确定，完成安装：<br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-17.png" alt="玖涯博客"><br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-18.png" alt="玖涯博客"></li><li>激活Pycharm：<br> 登录官网申请学生账户（使用学校的学生邮箱申请）：<br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-19.png" alt="玖涯博客">账户申请成功并通过验证之后，打开pycharm，在help -&gt; register中输入用户名密码：<br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-20.png" alt="玖涯博客">最终激活成功如下：<br><img src="/2020/05/04/Pix2pix%E9%A1%B9%E7%9B%AE%EF%BC%88Keras%EF%BC%89%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4%E6%8C%87%E5%AF%BC%E8%AF%B4/pasted-21.png" alt="玖涯博客"></li></ol><h2 id="三、在Pycharm中配置Anaconda环境"><a href="#三、在Pycharm中配置Anaconda环境" class="headerlink" title="三、在Pycharm中配置Anaconda环境"></a>三、在Pycharm中配置Anaconda环境</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 深度学习 </category>
+          
+          <category> 大数据班 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Keras </tag>
+            
+            <tag> Pix2pix </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>王道机试第五章《图论》——3.最小生成树(MST)</title>
       <link href="/2020/02/20/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%943-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91-MST/"/>
       <url>/2020/02/20/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%943-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91-MST/</url>
