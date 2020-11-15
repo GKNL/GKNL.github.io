@@ -64,8 +64,11 @@
 <meta property="og:image" content="https://gknl.github.io/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-5.png">
 <meta property="og:image" content="https://gknl.github.io/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-7.png">
 <meta property="og:image" content="https://gknl.github.io/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-8.png">
+<meta property="og:image" content="https://gknl.github.io/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-9.png">
+<meta property="og:image" content="https://gknl.github.io/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-10.png">
+<meta property="og:image" content="https://gknl.github.io/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-11.png">
 <meta property="article:published_time" content="2020-11-14T05:43:00.000Z">
-<meta property="article:modified_time" content="2020-11-14T08:48:25.331Z">
+<meta property="article:modified_time" content="2020-11-15T08:13:30.100Z">
 <meta property="article:author" content="PM">
 <meta property="article:tag" content="计算机视觉">
 <meta name="twitter:card" content="summary">
@@ -248,10 +251,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-11-14 13:43:00 / 修改时间：16:48:25" itemprop="dateCreated datePublished" datetime="2020-11-14T13:43:00+08:00">2020-11-14</time>
+              <time title="创建时间：2020-11-14 13:43:00" itemprop="dateCreated datePublished" datetime="2020-11-14T13:43:00+08:00">2020-11-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-15 16:13:30" itemprop="dateModified" datetime="2020-11-15T16:13:30+08:00">2020-11-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -291,14 +300,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
+              <span>5.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -320,7 +329,7 @@ img{text-align: center; margin: 0 auto;width:80%;}
 <a id="more"></a>
 <p>（PS：最近刚看了《大开眼戒》，分享一首曲子）</p>
 
-    <div id="aplayer-tuVcDEMd" class="aplayer aplayer-tag-marker meting-tag-marker"
+    <div id="aplayer-zAitPvNz" class="aplayer aplayer-tag-marker meting-tag-marker"
          data-id="26294503" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="true" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86" data-loop="one" data-volume="0.7"
     ></div>
 
@@ -337,7 +346,12 @@ img{text-align: center; margin: 0 auto;width:80%;}
 </ul>
 </li>
 <li><em>检测流程</em><ol>
-<li><strong>生成候选区域</strong>：确定搜索范围</li>
+<li><strong>生成候选区域</strong>：确定搜索范围<ul>
+<li><strong>滑动窗口</strong>：滑动窗口本质上就是穷举法，利用不同的尺度和长宽比把所有可能的大大小小的块都穷举出来，然后送去识别，识别出来概率大的就留下来。很明显，这样的方法复杂度太高，产生了很多的冗余候选区域，在现实当中不可行。</li>
+<li><strong>规则块</strong>：在穷举法的基础上进行了一些剪枝，只选用固定的大小和长宽比。这在一些特定的应用场景是很有效的，比如拍照搜题APP小猿搜题中的汉字检测，因为汉字方方正正，长宽比大多比较一致，因此用规则块做区域提名是一种比较合适的选择。但是对于普通的目标检测来说，规则块依然需要访问很多的位置，复杂度高。</li>
+<li><strong>选择性搜索</strong>：从机器学习的角度来说，前面的方法召回是不错了，但是精度差强人意，所以问题的核心在于如何有效地去除冗余候选区域。其实冗余候选区域大多是发生了重叠，选择性搜索利用这一点，自底向上合并相邻的重叠区域，从而减少冗余。</li>
+</ul>
+</li>
 <li><strong>提取区域特征</strong>：将候选区域表示为定长向量（由于分类器需要相同大小相同长度的向量作为输入）</li>
 <li><strong>对区域进行分类</strong>：确定是否包含物体及其所属的类别</li>
 <li><strong>后处理</strong>：对重叠较多的框进行合并（希望同一个物体上只有一个检测框）</li>
@@ -370,11 +384,37 @@ img{text-align: center; margin: 0 auto;width:80%;}
 </blockquote>
 <p>伪代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> window <span class="keyword">in</span> windows </span><br><span class="line">    patch = get_patch(image, window) </span><br><span class="line">　　results = detector(patch)</span><br></pre></td></tr></table></figure>
-<h4 id="B-选择性搜索"><a href="#B-选择性搜索" class="headerlink" title="B.选择性搜索"></a><em>B.选择性搜索</em></h4><p>我们不使用暴力方法，而是用<strong>候选区域方法（region proposal method）创建目标检测的感兴趣区域（ROI）</strong>。</p>
-<p><font color="#FF0000">在选择性搜索（selective search，SS）中，我们首先将每个像素作为一组，计算每一组的纹理，并将两个<strong>最接近的组</strong>结合起来。但是为了避免单个区域吞噬其他区域，我们首先对较小的组进行分组。我们继续合并区域，直到所有区域都结合在一起。</font></p>
+<h4 id="B-选择性搜索"><a href="#B-选择性搜索" class="headerlink" title="B.选择性搜索"></a><em>B.选择性搜索</em></h4><p>【算法具体细节参见：<a href="https://www.cnblogs.com/zyly/p/9259392.html" target="_blank" rel="noopener">目标检测之选择性搜索-Selective Search</a>】</p>
+<h5 id="①SS算法原理"><a href="#①SS算法原理" class="headerlink" title="①SS算法原理"></a>①SS算法原理</h5><p>我们不使用暴力方法，而是用<strong>候选区域方法（region proposal method）创建目标检测的感兴趣区域（ROI）</strong>。</p>
+<p>Selective Search的诞生，需要考虑以下几个问题：</p>
+<ol>
+<li><strong>适应不同尺度</strong>：穷举搜索（Exhaustive Selective）通过改变窗口大小来适应物体的不同尺度，选择搜索（Selective Search）同样无法避免这个问题。算法采用了图像分割（Image Segmentation）以及使用一种层次算法（Hierarchical Algorithm）有效地解决了这个问题。</li>
+<li><strong>多样化</strong>：单一的策略无法应对多种类别的图像。使用颜色（color）、纹理（texture）、大小（size）等多种策略对分割好的区域（region）进行合并。</li>
+<li><strong>速度快</strong>：算法，就像功夫一样，唯快不破！</li>
+</ol>
+<blockquote>
+<p><font color="#FF0000">在选择性搜索（selective search，SS）中，我们首先将每个像素作为一组，计算每一组的纹理，并将两个<strong>最接近的组</strong>结合起来(贪心策略)。但是为了避免单个区域吞噬其他区域，我们首先对较小的组进行分组。我们继续合并区域，直到所有区域都结合在一起。然后这其中每次产生的图像块包括合并的图像块我们都保存下来，这样就得到图像的分层表示</font></p>
+</blockquote>
 <p>下图第一行展示了如何使区域增长，第二行中的蓝色矩形代表合并过程中所有可能的 ROI。</p>
 <p><img src="/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-3.png" alt="玖涯博客"></p>
-<h4 id="C-R-CNN"><a href="#C-R-CNN" class="headerlink" title="C.R-CNN"></a><em>C.R-CNN</em></h4><p>R-CNN 利用<strong>候选区域方法</strong>创建了约 2000 个 ROI。这些区域被转换为<strong>固定大小</strong>的图像，并分别馈送到卷积神经网络中（将原始图像根据ROI切割、reshape再送进CNN学习）。<font color=#0000FF>该网络架构后面会跟几个全连接层，以实现目标分类并提炼边界框。</font></p>
+<h5 id="②SS算法步骤"><a href="#②SS算法步骤" class="headerlink" title="②SS算法步骤"></a>②SS算法步骤</h5><p>选择性搜索具体算法步骤如下：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">输入: 一张图片</span><br><span class="line">输出：候选的目标位置集合L</span><br><span class="line"></span><br><span class="line">算法：</span><br><span class="line"><span class="number">1</span>: 利用切分方法得到候选的区域集合R = &#123;r1,r2,…,rn&#125;</span><br><span class="line"><span class="number">2</span>: 初始化相似集合S = ϕ</span><br><span class="line"><span class="number">3</span>: foreach 遍历邻居区域对(ri,rj) <span class="keyword">do</span></span><br><span class="line"><span class="number">4</span>:     计算相似度s(ri,rj)</span><br><span class="line"><span class="number">5</span>:     S = S  ∪ s(ri,rj)</span><br><span class="line"><span class="number">6</span>: <span class="keyword">while</span> S <span class="keyword">not</span>=ϕ <span class="keyword">do</span></span><br><span class="line"><span class="number">7</span>:     从S中得到最大的相似度s(ri,rj)=max(S)</span><br><span class="line"><span class="number">8</span>:     合并对应的区域rt = ri ∪ rj</span><br><span class="line"><span class="number">9</span>:     移除ri对应的所有相似度：S = S\s(ri,r*)</span><br><span class="line"><span class="number">10</span>:    移除rj对应的所有相似度：S = S\s(r*,rj)</span><br><span class="line"><span class="number">11</span>:    计算rt对应的相似度集合St</span><br><span class="line"><span class="number">12</span>:    S = S ∪ St</span><br><span class="line"><span class="number">13</span>:    R = R ∪ rt</span><br><span class="line"><span class="number">14</span>: L = R中所有区域对应的边框</span><br></pre></td></tr></table></figure>
+<h5 id="③保持多样性的策略"><a href="#③保持多样性的策略" class="headerlink" title="③保持多样性的策略"></a>③保持多样性的策略</h5><p>区域合并采用了多样性的策略，如果简单采用一种策略很容易错误合并不相似的区域，比如只考虑纹理时，不同颜色的区域很容易被误合并。选择性搜索采用<strong>三种多样性策略</strong>来增加候选区域以保证召回：</p>
+<ul>
+<li>多种颜色空间，考虑RGB、灰度、HSV及其变种等</li>
+<li>多种相似度度量标准，既考虑颜色相似度，又考虑纹理、大小、重叠情况等。</li>
+<li>通过改变阈值初始化原始区域，阈值越大，分割的区域越少。</li>
+</ul>
+<h4 id="C-R-CNN"><a href="#C-R-CNN" class="headerlink" title="C.R-CNN"></a><em>C.R-CNN</em></h4><blockquote>
+<p>R-CNN分为四个部分：区域划分、特征提取、区域分类、边框回归</p>
+<ul>
+<li>区域划分：使用selective search算法画出2k个左右候选框，送入CNN</li>
+<li>特征提取：使用imagenet上训练好的模型，进行finetune</li>
+<li>区域分类：从头训练一个SVM分类器，对CNN出来的特征向量进行分类</li>
+<li>边框回归：使用线性回归，对边框坐标进行精修</li>
+</ul>
+</blockquote>
+<p>R-CNN 利用<strong>候选区域方法</strong>创建了约 2000 个 ROI。这些区域被转换为<strong>固定大小</strong>的图像，并分别馈送到卷积神经网络中（将原始图像根据ROI切割、reshape再送进CNN学习）。<font color=#0000FF>该网络架构后面会跟几个全连接层，以实现目标分类并提炼边界框。</font></p>
 <p><img src="/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-4.png" alt="玖涯博客"><br><strong><font color=#FF0000>通过使用更少且更高质量的 ROI，R-CNN 要比滑动窗口方法更快速、更准确。</font></strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ROIs = region_proposal(image)</span><br><span class="line"><span class="keyword">for</span> ROI <span class="keyword">in</span> ROIs:</span><br><span class="line">    patch = get_patch(image, ROI) </span><br><span class="line">    results = detector(pach)</span><br></pre></td></tr></table></figure>
 <ul>
@@ -390,6 +430,35 @@ img{text-align: center; margin: 0 auto;width:80%;}
 <p>如下图，Fast R-CNN将候选区域直接应用于特征图，并使用 ROI 池化将其转化为固定大小的特征图块：<br><img src="/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-7.png" alt="将候选区域直接应用于特征图，并使用 ROI 池化将其转化为固定大小的特征图块"></p>
 <p><strong>以下是 Fast R-CNN 的流程图：</strong><br><img src="/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-8.png" alt="玖涯博客"><br>在下面的伪代码中，<strong>计算量巨大的特征提取过程从 For 循环中移出来了</strong>，因此速度得到显著提升。Fast R-CNN 的训练速度是 R-CNN 的 10 倍，推断速度是后者的 150 倍。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">feature_maps = process(image)</span><br><span class="line">ROIs = region_proposal(feature_maps)</span><br><span class="line"><span class="keyword">for</span> ROI <span class="keyword">in</span> ROIs:</span><br><span class="line">    patch = roi_pooling(feature_maps, ROI) </span><br><span class="line">    results = detector2(patch)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><font color=FF0000>Fast R-CNN 最重要的一点就是包含特征提取器、分类器和边界框回归器在内的整个网络能通过多任务损失函数进行端到端的训练，这种多任务损失即结合了分类损失和定位损失的方法，大大提升了模型准确度。</font></p>
+</blockquote>
+<h4 id="E-Faster-R-CNN"><a href="#E-Faster-R-CNN" class="headerlink" title="E.Faster R-CNN"></a>E.Faster R-CNN</h4><p>Fast R-CNN 依赖于外部候选区域方法，如选择性搜索。但这些算法在 CPU 上运行且速度很慢。在测试中，Fast R-CNN 需要 2.3 秒来进行预测，其中 2 秒用于生成 2000 个 ROI。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">feature_maps = process(image)</span><br><span class="line">ROIs = region_proposal(feature_maps) <span class="comment"># Expensive!</span></span><br><span class="line"><span class="keyword">for</span> ROI <span class="keyword">in</span> ROIs:</span><br><span class="line">    patch = roi_pooling(feature_maps, ROI) </span><br><span class="line">    results = detector2(patch)</span><br></pre></td></tr></table></figure>
+<p>Faster R-CNN 采用与 Fast R-CNN 相同的设计，<strong>只是它用内部深层网络(RPN)代替了候选区域方法</strong>。新的候选区域网络（RPN）在生成 ROI 时效率更高，并且以每幅图像 10 毫秒的速度运行。</p>
+<p><img src="/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-9.png" alt="玖涯博客"></p>
+<h5 id="①候选区域网络（RPN）"><a href="#①候选区域网络（RPN）" class="headerlink" title="①候选区域网络（RPN）"></a>①候选区域网络（RPN）</h5><p><strong>候选区域网络（RPN）</strong>将第一个卷积网络的输出特征图作为输入。它在特征图上滑动一个 3×3 的卷积核，以使用卷积网络（如下所示的 ZF 网络）构建与类别无关的候选区域。其他深度网络（如 VGG 或 ResNet）可用于更全面的特征提取，但这需要以速度为代价。</p>
+<p>ZF 网络最后会输出 256 个值，它们将馈送到两个独立的全连接层，以预测边界框和两个 objectness 分数，这两个 objectness 分数度量了边界框是否包含目标。我们其实可以使用回归器计算单个 objectness 分数，但为简洁起见，Faster R-CNN 使用只有两个类别的分类器：即<strong>带有目标的类别</strong>和<strong>不带有目标的类别</strong>。</p>
+<p><img src="/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-10.png" alt="玖涯博客"></p>
+<h4 id="F-基于区域的全卷积神经网络（R-FCN）"><a href="#F-基于区域的全卷积神经网络（R-FCN）" class="headerlink" title="F.基于区域的全卷积神经网络（R-FCN）"></a>F.基于区域的全卷积神经网络（R-FCN）</h4><p>设计目的：</p>
+<blockquote>
+<p>虽然Faster R-CNN把整个的检测过程集成到了一个可以end-to-end训练的网络，实现了大部分计算的共享，也极大的提高了检测速度。<strong>但是整个检测过程还是不够快，因为Faster R-CNN虽然使用了conv layers来共享特征提取，但是在RoI pooling提取每个RoI的feature map之后，要使用FC layer单独对每个RoI进行分类和回归</strong>，所以假设提取了128个RoI，那么就要使用FC layer进行128次的回归和分类，而且大家也都知道FC layer的计算量是非常大的，所以这部分的计算就拖慢了Faster R-CNN的检测速度。所以还需要更充分的共享计算才能再提高速度，因此文章中提出了使用全卷积网络(FCN, Fully Convolutional Network)来实现计算共享，提高速度。</p>
+</blockquote>
+<p>现在我们回顾一下所有问题。在 Faster R-CNN 中，检测器使用了多个全连接层进行预测。如果有 2000 个 ROI，那么成本非常高:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">feature_maps = process(image)</span><br><span class="line">ROIs = region_proposal(feature_maps)</span><br><span class="line"><span class="keyword">for</span> ROI <span class="keyword">in</span> ROIs</span><br><span class="line">    patch = roi_pooling(feature_maps, ROI)</span><br><span class="line">    class_scores, box = detector(patch)         <span class="comment"># Expensive!</span></span><br><span class="line">    class_probabilities = softmax(class_scores)</span><br></pre></td></tr></table></figure>
+<p><strong><font color=FF0000>R-FCN 通过减少每个 ROI 所需的工作量实现加速（去掉了全连接层）</font></strong>。</p>
+<p>上面基于区域的特征图与 ROI 是独立的，可以在每个 ROI 之外单独计算。剩下的工作就比较简单了，因此 R-FCN 的速度比 Faster R-CNN 快。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">feature_maps = process(image)</span><br><span class="line">ROIs = region_proposal(feature_maps)         </span><br><span class="line">score_maps = compute_score_map(feature_maps)</span><br><span class="line"><span class="keyword">for</span> ROI <span class="keyword">in</span> ROIs</span><br><span class="line">    V = region_roi_pool(score_maps, ROI)     </span><br><span class="line">    class_scores, box = average(V)                   <span class="comment"># Much simpler!</span></span><br><span class="line">    class_probabilities = softmax(class_scores)</span><br></pre></td></tr></table></figure>
+<p>PS：具体多看看链接<a href="https://www.cnblogs.com/guoyaohua/p/8994246.html" target="_blank" rel="noopener">基于区域的全卷积神经网络（R-FCN）</a></p>
+<h3 id="单阶段目标检测模型"><a href="#单阶段目标检测模型" class="headerlink" title="单阶段目标检测模型"></a>单阶段目标检测模型</h3><p>第二部分，将对单次目标检测器（包括 SSD、YOLO、YOLOv2、YOLOv3）进行综述。将分析 FPN 以理解多尺度特征图如何提高准确率，特别是小目标的检测，其在单次检测器中的检测效果通常很差。</p>
+<p>然后将分析 Focal loss 和 RetinaNet，看看它们是如何解决训练过程中的类别不平衡问题的。</p>
+<h4 id="A-单次目标检测器"><a href="#A-单次目标检测器" class="headerlink" title="A.单次目标检测器"></a>A.单次目标检测器</h4><p>Faster R-CNN 中，在分类器之后有一个专用的候选区域网络。基于区域的检测器是很准确的，但需要付出代价。Faster R-CNN 在 PASCAL VOC 2007 测试集上每秒处理 7 帧的图像（7 FPS）。和 R-FCN 类似，研究者通过减少每个 ROI 的工作量来精简流程。</p>
+<p>作为替代，我们是否需要一个分离的候选区域步骤？我们可以直接在一个步骤内得到边界框和类别吗？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">feature_maps = process(image)</span><br><span class="line">results = detector3(feature_maps) <span class="comment"># No more separate step for ROIs</span></span><br></pre></td></tr></table></figure>
+<p>让我们再看一下滑动窗口检测器。我们可以通过在特征图上滑动窗口来检测目标。对于不同的目标类型，我们使用不同的窗口类型。</p>
+<p>以前的滑动窗口方法的致命错误在于使用窗口作为最终的边界框，这就需要非常多的形状来覆盖大部分目标。<strong>更有效的方法是将窗口当做初始猜想，这样我们就得到了从当前滑动窗口同时预测类别和边界框的检测器。</strong></p>
+<p><img src="/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-11.png" alt="基于滑动窗口进行预测"></p>
+
     </div>
 
     
@@ -491,7 +560,7 @@ img{text-align: center; margin: 0 auto;width:80%;}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目标检测基础"><span class="nav-number">2.</span> <span class="nav-text">目标检测基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目标检测的深度学习方法"><span class="nav-number">3.</span> <span class="nav-text">目标检测的深度学习方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Anchor-based方法"><span class="nav-number">3.1.</span> <span class="nav-text">Anchor-based方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#双阶段目标检测模型"><span class="nav-number">3.1.1.</span> <span class="nav-text">双阶段目标检测模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-滑动窗口检测器"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">A.滑动窗口检测器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-选择性搜索"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">B.选择性搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-R-CNN"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">C.R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-Fast-R-CNN"><span class="nav-number">3.1.1.4.</span> <span class="nav-text">D.Fast R-CNN</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目标检测基础"><span class="nav-number">2.</span> <span class="nav-text">目标检测基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目标检测的深度学习方法"><span class="nav-number">3.</span> <span class="nav-text">目标检测的深度学习方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Anchor-based方法"><span class="nav-number">3.1.</span> <span class="nav-text">Anchor-based方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#双阶段目标检测模型"><span class="nav-number">3.1.1.</span> <span class="nav-text">双阶段目标检测模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-滑动窗口检测器"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">A.滑动窗口检测器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-选择性搜索"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">B.选择性搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#①SS算法原理"><span class="nav-number">3.1.1.2.1.</span> <span class="nav-text">①SS算法原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#②SS算法步骤"><span class="nav-number">3.1.1.2.2.</span> <span class="nav-text">②SS算法步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#③保持多样性的策略"><span class="nav-number">3.1.1.2.3.</span> <span class="nav-text">③保持多样性的策略</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-R-CNN"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">C.R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-Fast-R-CNN"><span class="nav-number">3.1.1.4.</span> <span class="nav-text">D.Fast R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E-Faster-R-CNN"><span class="nav-number">3.1.1.5.</span> <span class="nav-text">E.Faster R-CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#①候选区域网络（RPN）"><span class="nav-number">3.1.1.5.1.</span> <span class="nav-text">①候选区域网络（RPN）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#F-基于区域的全卷积神经网络（R-FCN）"><span class="nav-number">3.1.1.6.</span> <span class="nav-text">F.基于区域的全卷积神经网络（R-FCN）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单阶段目标检测模型"><span class="nav-number">3.1.2.</span> <span class="nav-text">单阶段目标检测模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-单次目标检测器"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">A.单次目标检测器</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -571,13 +640,13 @@ img{text-align: center; margin: 0 auto;width:80%;}
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">38k</span>
+    <span title="站点总字数">41k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">34 分钟</span>
+    <span title="站点阅读时长">38 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
