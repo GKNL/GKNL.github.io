@@ -50,12 +50,12 @@
   };
 </script>
 
-  <meta name="description" content="img{text-align: center; margin: 0 auto;width:80%;}  前言 一转眼已经过去半年了，今年最大的愿望已经顺利实现！（有时间再专门开一篇文章专门记录保研之旅）几经波折，总算是定好毕设题目啦！接下来是漫长的学习与实践道路，为了督促学习，开此坑来记录毕设学习全过程。  本文记录了个人对于cv目标检测领域的知识点综述总结【持续更新ing】">
+  <meta name="description" content="img{text-align: center; margin: 0 auto;width:80%;}  前言 一转眼已经过去半年了，今年最大的愿望已经顺利实现！（有时间再专门开一篇文章专门记录保研之旅）几经波折，总算是定好毕设题目啦！接下来是漫长的学习与实践道路，为了督促学习，开此坑来记录毕设学习全过程。  本文记录了个人对于cv目标检测领域的知识点综述总结【Anchor-free待填坑】">
 <meta property="og:type" content="article">
 <meta property="og:title" content="毕设学习之旅-1.目标检测综述">
 <meta property="og:url" content="https://gknl.github.io/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC%E8%BF%B0/index.html">
 <meta property="og:site_name" content="钢盔女郎の博客">
-<meta property="og:description" content="img{text-align: center; margin: 0 auto;width:80%;}  前言 一转眼已经过去半年了，今年最大的愿望已经顺利实现！（有时间再专门开一篇文章专门记录保研之旅）几经波折，总算是定好毕设题目啦！接下来是漫长的学习与实践道路，为了督促学习，开此坑来记录毕设学习全过程。  本文记录了个人对于cv目标检测领域的知识点综述总结【持续更新ing】">
+<meta property="og:description" content="img{text-align: center; margin: 0 auto;width:80%;}  前言 一转眼已经过去半年了，今年最大的愿望已经顺利实现！（有时间再专门开一篇文章专门记录保研之旅）几经波折，总算是定好毕设题目啦！接下来是漫长的学习与实践道路，为了督促学习，开此坑来记录毕设学习全过程。  本文记录了个人对于cv目标检测领域的知识点综述总结【Anchor-free待填坑】">
 <meta property="og:image" content="https://gknl.github.io/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-0.png">
 <meta property="og:image" content="https://gknl.github.io/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-1.png">
 <meta property="og:image" content="https://gknl.github.io/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-2.png">
@@ -72,7 +72,7 @@
 <meta property="og:image" content="https://gknl.github.io/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-14.png">
 <meta property="og:image" content="https://gknl.github.io/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-15.png">
 <meta property="article:published_time" content="2020-11-14T05:43:00.000Z">
-<meta property="article:modified_time" content="2020-11-15T12:54:15.889Z">
+<meta property="article:modified_time" content="2020-11-16T05:30:37.318Z">
 <meta property="article:author" content="PM">
 <meta property="article:tag" content="计算机视觉">
 <meta name="twitter:card" content="summary">
@@ -263,7 +263,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-15 20:54:15" itemprop="dateModified" datetime="2020-11-15T20:54:15+08:00">2020-11-15</time>
+                <time title="修改时间：2020-11-16 13:30:37" itemprop="dateModified" datetime="2020-11-16T13:30:37+08:00">2020-11-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -304,14 +304,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>7.1k</span>
+              <span>7.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -329,11 +329,11 @@ img{text-align: center; margin: 0 auto;width:80%;}
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
 <p>一转眼已经过去半年了，今年最大的愿望已经顺利实现！（有时间再专门开一篇文章专门记录保研之旅）<br>几经波折，总算是定好毕设题目啦！接下来是漫长的学习与实践道路，为了督促学习，开此坑来记录毕设学习全过程。</p>
 </blockquote>
-<p><strong><font color="#FF0000">本文记录了个人对于cv目标检测领域的知识点综述总结【持续更新ing】</font></strong></p>
+<p><strong><font color="#FF0000">本文记录了个人对于cv目标检测领域的知识点综述总结【Anchor-free待填坑】</font></strong></p>
 <a id="more"></a>
 <p>（PS：最近刚看了《大开眼戒》，分享一首曲子）</p>
 
-    <div id="aplayer-jQperXeQ" class="aplayer aplayer-tag-marker meting-tag-marker"
+    <div id="aplayer-vUkHgBmT" class="aplayer aplayer-tag-marker meting-tag-marker"
          data-id="26294503" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="true" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86" data-loop="one" data-volume="0.7"
     ></div>
 
@@ -369,7 +369,7 @@ img{text-align: center; margin: 0 auto;width:80%;}
 <li><strong>anchor-free</strong>【不基于候选框的目标检测】</li>
 </ol>
 </blockquote>
-<h2 id="Anchor-based方法"><a href="#Anchor-based方法" class="headerlink" title="Anchor-based方法"></a>Anchor-based方法</h2><p>这一类别下，还可以具体细分为：</p>
+<h2 id="Anchor-based方法"><a href="#Anchor-based方法" class="headerlink" title="Anchor-based方法"></a><font color=#0000FF>Anchor-based方法</font></h2><p>这一类别下，还可以具体细分为：</p>
 <ol>
 <li><strong>双阶段</strong>【R-CNN,Fast R-CNN,Faster R-CNN,SPPnet】</li>
 <li><strong>单阶段</strong>【SSD, YOLO, YOLOv2，YOLOv3】</li>
@@ -471,7 +471,7 @@ img{text-align: center; margin: 0 auto;width:80%;}
 <p><img src="/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-13.png" alt="使用多尺度特征图用于检测"></p>
 <p><strong>SSD 使用卷积网络中较深的层来检测目标</strong>。如果我们按接近真实的比例重绘图像，我们会发现图像的空间分辨率已经被显著降低，且可能已无法定位在低分辨率中难以检测的小目标。如果出现了这样的问题，我们需要增加输入图像的分辨率。</p>
 <h4 id="Ⅲ-YOLO"><a href="#Ⅲ-YOLO" class="headerlink" title="Ⅲ.YOLO"></a>Ⅲ.YOLO</h4><blockquote>
-<p><strong><font color=#FF0000>YOLO</font></strong>在卷积层之后使用了 DarkNet 来做特征检测。</p>
+<p>准确地说，Yolo算法一共有三个版本，<strong>YoloV1可以算作anchor-free类</strong>；YoloV2开始引入anchor，因此<strong>YoloV2和YoloV3算作anchor-based类</strong>。<br><strong><font color=#FF0000>YOLO</font></strong>在卷积层之后使用了 DarkNet 来做特征检测。</p>
 </blockquote>
 <p><img src="/2020/11/14/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-1-%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%BB%BC/pasted-14.png" alt="玖涯博客"><br><strong>然而，它并没有使用多尺度特征图来做独立的检测。相反，它将特征图部分平滑化，并将其和另一个较低分辨率的特征图拼接。</strong>例如，YOLO 将一个 28 × 28 × 512 的层重塑为 14 × 14 × 2048，然后将它和 14 × 14 ×1024 的特征图拼接。之后，YOLO 在新的 14 × 14 × 3072 层上应用卷积核进行预测。</p>
 <blockquote>
@@ -486,7 +486,30 @@ img{text-align: center; margin: 0 auto;width:80%;}
 <li>其中<strong>自下而上的路径（上图左侧）</strong>是用于特征提取的常用卷积网络。空间分辨率自下而上地下降。当检测到更高层的结构，每层的语义值增加。</li>
 <li>同时，FPN 提供了一条<strong>自上而下的路径（上图右侧）</strong>，从语义丰富的层构建高分辨率的层。重建层的语义较强，但在经过所有的上采样和下采样之后，目标的位置不精确。在重建层和相应的特征图之间添加横向连接可以使位置侦测更加准确。</li>
 </ul>
-<p>【Anchor-free的检测模型明日梳理…】</p>
+<hr>
+<h2 id="Anchor-free方法"><a href="#Anchor-free方法" class="headerlink" title="Anchor-free方法"></a><font color=#0000FF>Anchor-free方法</font></h2><p>关于anchor-free方法，首先是之前没有太多的接触，翻看了很多帖子发现都看不太懂（有点深奥？），更多的细节之后再来补充，先记录一些宏观性的比较，了解一下大体上的区别。</p>
+<h3 id="anchor-free与anchor-based的区别"><a href="#anchor-free与anchor-based的区别" class="headerlink" title="anchor-free与anchor-based的区别"></a>anchor-free与anchor-based的区别</h3><p>这个问题首先需要回答为什么要有 anchor。在深度学习时代，物体检测问题通常都被建模成对一些候选区域进行分类和回归的问题：</p>
+<ul>
+<li>在单阶段检测器中，这些候选区域就是通过滑窗方式产生的 anchor；</li>
+<li>在两阶段检测器中，候选区域是 RPN 生成的 proposal，但是 RPN 本身仍然是对滑窗方式产生的 anchor 进行分类和回归。</li>
+</ul>
+<p>而在 anchor-free 方法中，是通过另外一种手段来解决检测问题的。同样分为两个子问题，即<strong><font color=#FF0000>确定物体中心</font></strong>和<strong><font color=#FF0000>对四条边框的预测</font></strong>。预测物体中心时，具体实现既可以<u>定义一个 hard 的中心区域，将中心预测融入到类别预测的 target 里面</u>，也可以<u>预测一个 soft 的 centerness score</u>。对于四条边框的预测，则比较一致，都是预测该像素点到 ground truth 框的四条边距离，不过会使用一些 trick 来限制 regress 的范围。</p>
+<h3 id="anchor-free类算法归纳"><a href="#anchor-free类算法归纳" class="headerlink" title="anchor-free类算法归纳"></a>anchor-free类算法归纳</h3><ol>
+<li>基于多关键点联合表达的方法<ul>
+<li>CornerNet/CornerNet-lite：左上角点+右下角点</li>
+<li>ExtremeNet：上下左右4个极值点+中心点</li>
+<li>CenterNet：Keypoint Triplets for Object Detection：左上角点+右下角点+中心点</li>
+<li>RepPoints：9个学习到的自适应跳动的采样点e.FoveaBox：中心点+左上角点+右下角点</li>
+<li>PLN：4个角点+中心点</li>
+</ul>
+</li>
+<li>基于单中心点预测的方法<ul>
+<li>CenterNet：Objects as Points：中心点+宽度+高度</li>
+<li>CSP：中心点+高度（作者预设了目标宽高比固定，根据高度计算出宽度）</li>
+<li>FCOS：中心点+到框的2个距离</li>
+</ul>
+</li>
+</ol>
 
     </div>
 
@@ -589,7 +612,7 @@ img{text-align: center; margin: 0 auto;width:80%;}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目标检测基础"><span class="nav-number">2.</span> <span class="nav-text">目标检测基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目标检测的深度学习方法"><span class="nav-number">3.</span> <span class="nav-text">目标检测的深度学习方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Anchor-based方法"><span class="nav-number">3.1.</span> <span class="nav-text">Anchor-based方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#双阶段目标检测模型"><span class="nav-number">3.1.1.</span> <span class="nav-text">双阶段目标检测模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅰ-滑动窗口检测器"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">Ⅰ.滑动窗口检测器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅱ-选择性搜索"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">Ⅱ.选择性搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#①SS算法原理"><span class="nav-number">3.1.1.2.1.</span> <span class="nav-text">①SS算法原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#②SS算法步骤"><span class="nav-number">3.1.1.2.2.</span> <span class="nav-text">②SS算法步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#③保持多样性的策略"><span class="nav-number">3.1.1.2.3.</span> <span class="nav-text">③保持多样性的策略</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅲ-R-CNN"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">Ⅲ.R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅳ-Fast-R-CNN"><span class="nav-number">3.1.1.4.</span> <span class="nav-text">Ⅳ.Fast R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅴ-Faster-R-CNN"><span class="nav-number">3.1.1.5.</span> <span class="nav-text">Ⅴ.Faster R-CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#①候选区域网络（RPN）"><span class="nav-number">3.1.1.5.1.</span> <span class="nav-text">①候选区域网络（RPN）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅵ-基于区域的全卷积神经网络（R-FCN）"><span class="nav-number">3.1.1.6.</span> <span class="nav-text">Ⅵ.基于区域的全卷积神经网络（R-FCN）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单阶段目标检测模型"><span class="nav-number">3.1.2.</span> <span class="nav-text">单阶段目标检测模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅰ-单次目标检测器"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">Ⅰ.单次目标检测器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅱ-SSD-Single-Shot-MultiBox-Detector"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">Ⅱ.SSD(Single Shot MultiBox Detector)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅲ-YOLO"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">Ⅲ.YOLO</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#①特征金字塔网络（FPN）"><span class="nav-number">3.1.2.3.1.</span> <span class="nav-text">①特征金字塔网络（FPN）</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目标检测基础"><span class="nav-number">2.</span> <span class="nav-text">目标检测基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目标检测的深度学习方法"><span class="nav-number">3.</span> <span class="nav-text">目标检测的深度学习方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Anchor-based方法"><span class="nav-number">3.1.</span> <span class="nav-text">Anchor-based方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#双阶段目标检测模型"><span class="nav-number">3.1.1.</span> <span class="nav-text">双阶段目标检测模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅰ-滑动窗口检测器"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">Ⅰ.滑动窗口检测器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅱ-选择性搜索"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">Ⅱ.选择性搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#①SS算法原理"><span class="nav-number">3.1.1.2.1.</span> <span class="nav-text">①SS算法原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#②SS算法步骤"><span class="nav-number">3.1.1.2.2.</span> <span class="nav-text">②SS算法步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#③保持多样性的策略"><span class="nav-number">3.1.1.2.3.</span> <span class="nav-text">③保持多样性的策略</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅲ-R-CNN"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">Ⅲ.R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅳ-Fast-R-CNN"><span class="nav-number">3.1.1.4.</span> <span class="nav-text">Ⅳ.Fast R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅴ-Faster-R-CNN"><span class="nav-number">3.1.1.5.</span> <span class="nav-text">Ⅴ.Faster R-CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#①候选区域网络（RPN）"><span class="nav-number">3.1.1.5.1.</span> <span class="nav-text">①候选区域网络（RPN）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅵ-基于区域的全卷积神经网络（R-FCN）"><span class="nav-number">3.1.1.6.</span> <span class="nav-text">Ⅵ.基于区域的全卷积神经网络（R-FCN）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单阶段目标检测模型"><span class="nav-number">3.1.2.</span> <span class="nav-text">单阶段目标检测模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅰ-单次目标检测器"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">Ⅰ.单次目标检测器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅱ-SSD-Single-Shot-MultiBox-Detector"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">Ⅱ.SSD(Single Shot MultiBox Detector)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ⅲ-YOLO"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">Ⅲ.YOLO</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#①特征金字塔网络（FPN）"><span class="nav-number">3.1.2.3.1.</span> <span class="nav-text">①特征金字塔网络（FPN）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Anchor-free方法"><span class="nav-number">3.2.</span> <span class="nav-text">Anchor-free方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#anchor-free与anchor-based的区别"><span class="nav-number">3.2.1.</span> <span class="nav-text">anchor-free与anchor-based的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#anchor-free类算法归纳"><span class="nav-number">3.2.2.</span> <span class="nav-text">anchor-free类算法归纳</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -675,7 +698,7 @@ img{text-align: center; margin: 0 auto;width:80%;}
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">39 分钟</span>
+    <span title="站点阅读时长">40 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
