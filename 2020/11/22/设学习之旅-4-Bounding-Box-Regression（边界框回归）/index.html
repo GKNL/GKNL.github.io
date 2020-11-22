@@ -50,21 +50,29 @@
   };
 </script>
 
-  <meta name="description" content="写在前面由于自己的贪玩和懒惰导致剩余时间不多了！因此先暂时跳过第四章《数学问题》，等把后三章解决完再回来。 图的相关概念略 图的存储 表示图有两种常用的数据结构：邻接矩阵、邻接链表。">
+  <meta name="description" content="前言 同样，在《Position Detection and Direction Prediction for Arbitrary-Oriented Ships via Multitask Rotation Region Convolutional Neural Network》论文中，关于Loss Function部分的数学公式难以理解，并且文中没有给出详细的推导过程，看了半天，后来才发现是大体">
 <meta property="og:type" content="article">
-<meta property="og:title" content="王道机试第五章《图论》——1.图的存储">
-<meta property="og:url" content="https://gknl.github.io/2020/02/12/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%941-%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8/index.html">
+<meta property="og:title" content="毕设学习之旅-4.Bounding Box Regression（边界框回归）">
+<meta property="og:url" content="https://gknl.github.io/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92%EF%BC%89/index.html">
 <meta property="og:site_name" content="钢盔女郎の博客">
-<meta property="og:description" content="写在前面由于自己的贪玩和懒惰导致剩余时间不多了！因此先暂时跳过第四章《数学问题》，等把后三章解决完再回来。 图的相关概念略 图的存储 表示图有两种常用的数据结构：邻接矩阵、邻接链表。">
-<meta property="og:image" content="https://gknl.github.io/2020/02/12/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%941-%E5%9B%BE%E7%9A%84%E5%AD%98/pasted-0.png">
-<meta property="og:image" content="https://gknl.github.io/2020/02/12/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%941-%E5%9B%BE%E7%9A%84%E5%AD%98/pasted-1.png">
-<meta property="article:published_time" content="2020-02-12T08:55:20.000Z">
-<meta property="article:modified_time" content="2020-02-12T09:43:02.893Z">
+<meta property="og:description" content="前言 同样，在《Position Detection and Direction Prediction for Arbitrary-Oriented Ships via Multitask Rotation Region Convolutional Neural Network》论文中，关于Loss Function部分的数学公式难以理解，并且文中没有给出详细的推导过程，看了半天，后来才发现是大体">
+<meta property="og:image" content="https://gknl.github.io/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-0.png">
+<meta property="og:image" content="https://gknl.github.io/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-1.png">
+<meta property="og:image" content="https://gknl.github.io/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-2.png">
+<meta property="og:image" content="https://gknl.github.io/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-3.png">
+<meta property="og:image" content="https://gknl.github.io/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-4.png">
+<meta property="og:image" content="https://gknl.github.io/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-5.png">
+<meta property="og:image" content="https://gknl.github.io/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-6.png">
+<meta property="og:image" content="https://gknl.github.io/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-7.png">
+<meta property="article:published_time" content="2020-11-22T11:11:00.000Z">
+<meta property="article:modified_time" content="2020-11-22T13:05:41.135Z">
 <meta property="article:author" content="PM">
+<meta property="article:tag" content="毕业设计">
+<meta property="article:tag" content="目标检测">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gknl.github.io/2020/02/12/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%941-%E5%9B%BE%E7%9A%84%E5%AD%98/pasted-0.png">
+<meta name="twitter:image" content="https://gknl.github.io/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-0.png">
 
-<link rel="canonical" href="https://gknl.github.io/2020/02/12/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%941-%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8/">
+<link rel="canonical" href="https://gknl.github.io/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -76,7 +84,7 @@
   };
 </script>
 
-  <title>王道机试第五章《图论》——1.图的存储 | 钢盔女郎の博客</title>
+  <title>毕设学习之旅-4.Bounding Box Regression（边界框回归） | 钢盔女郎の博客</title>
   
 
 
@@ -107,6 +115,9 @@
   </style>
 </noscript>
 
+<link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
+<script src="\assets\js\Meting.min.js" class="meting-script-marker"></script>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -216,7 +227,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://gknl.github.io/2020/02/12/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%941-%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8/">
+    <link itemprop="mainEntityOfPage" href="https://gknl.github.io/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/headImage.jpeg">
@@ -229,7 +240,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          王道机试第五章《图论》——1.图的存储
+          毕设学习之旅-4.Bounding Box Regression（边界框回归）
         </h1>
 
         <div class="post-meta">
@@ -240,7 +251,18 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-02-12 16:55:20 / 修改时间：17:43:02" itemprop="dateCreated datePublished" datetime="2020-02-12T16:55:20+08:00">2020-02-12</time>
+              <time title="创建时间：2020-11-22 19:11:00 / 修改时间：21:05:41" itemprop="dateCreated datePublished" datetime="2020-11-22T19:11:00+08:00">2020-11-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -259,8 +281,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/02/12/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%941-%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/12/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%941-%E5%9B%BE%E7%9A%84%E5%AD%98%E5%82%A8/" itemprop="commentCount"></span>
+    <a title="valine" href="/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92%EF%BC%89/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92%EF%BC%89/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -270,14 +292,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -289,41 +311,51 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>由于自己的贪玩和懒惰导致剩余时间不多了！因此先暂时跳过第四章《数学问题》，等把后三章解决完再回来。</p>
-<h1 id="图的相关概念"><a href="#图的相关概念" class="headerlink" title="图的相关概念"></a>图的相关概念</h1><p>略</p>
-<h1 id="图的存储"><a href="#图的存储" class="headerlink" title="图的存储"></a>图的存储</h1><blockquote>
-<p>表示图有两种常用的数据结构：<font color=#FF0000><strong>邻接矩阵</strong>、<strong>邻接链表</strong></font>。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>同样，在《Position Detection and Direction Prediction for Arbitrary-Oriented Ships via Multitask Rotation Region Convolutional Neural Network》论文中，关于Loss Function部分的数学公式难以理解，并且文中没有给出详细的推导过程，看了半天，后来才发现是大体上沿用的RCNN中提出的相关公式。<br>借鉴和引用博文来源：</p>
+<ol>
+<li><a href="https://www.jianshu.com/p/6725d0cb04fc" target="_blank" rel="noopener">【目标检测】什么是边框回归</a>【讲得简洁清晰】</li>
+<li><a href="https://blog.csdn.net/zijin0802034/article/details/77685438" target="_blank" rel="noopener">边框回归(Bounding Box Regression)详解</a></li>
+</ol>
 </blockquote>
 <a id="more"></a>
+<p>（按照惯例，《Requiem for a dream》的主bgm，很洗脑！）</p>
 
-<h2 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h2><p>邻接矩阵用一个二维数组来表示图的相关信息，即用<strong>二维数组</strong>单元edge[i][j]来表示结点i和结点j的关系。<br>若结点i和结点j之间存在边，我们用二维矩阵单元edge[i][j]来保存其权值，若结点i和结点j之间不存在边，则edge[i][j]为某约定的特殊字符（这里为-1）。</p>
-<p><img src="/2020/02/12/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%941-%E5%9B%BE%E7%9A%84%E5%AD%98/pasted-0.png" alt="玖涯博客"></p>
-<h3 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h3><p>若需遍历与某结点相邻的所有结点，就需依次<u>遍历二维数组中某行的所有元素</u>，判断其值后决定是否相邻，也就是说即使只有一个点与其相邻，我们也需要耗费大量的时间来遍历该行中所有的数组单元，时间利用率较低。</p>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>用邻接矩阵来保存结点个数为n的图，其空间复杂度为O（n*n）。<br>当所要表示的图为稀疏图时该矩阵变为稀疏矩阵，大量的空间被浪费。</p>
+    <div id="aplayer-eyOTHopg" class="aplayer aplayer-tag-marker meting-tag-marker"
+         data-id="Fall, Marion Barfs" data-server="tencent" data-type="search" data-mode="circulation" data-autoplay="true" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86" data-loop="one" data-volume="0.7"
+    ></div>
+
+
+<h1 id="为什么要边框回归？"><a href="#为什么要边框回归？" class="headerlink" title="为什么要边框回归？"></a>为什么要边框回归？</h1><blockquote>
+<p><strong><font color=#FF0000>通过对候选框做边框回归，可以使最终检测到的目标定位更加接近真实值，提高定位准确率</font></strong>。</p>
+</blockquote>
+<p>如下图所示，绿色的框表示Ground Truth, 红色的框为Selective Search提取的Region Proposal。</p>
+<p><img src="/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-0.png" alt="玖涯博客"><br>那么即便红色的框被分类器识别为飞机，但是由于红色的框定位不准(IoU&lt;0.5)， 那么这张图相当于没有正确的检测出飞机。 如果我们能对红色的框进行微调， 使得经过微调后的窗口跟Ground Truth 更接近， 这样岂不是定位会更准确。确实，Bounding-box regression 就是用来微调这个窗口的。</p>
+<h1 id="什么是边框回归？"><a href="#什么是边框回归？" class="headerlink" title="什么是边框回归？"></a>什么是边框回归？</h1><blockquote>
+<p><strong><font color=#FF0000>目标检测过程中对产生的候选框以标注好的真实框为目标进行逼近的过程</font></strong>。<br>由于一幅图像上的框可以由中心点坐标(Xc, Yc)和宽W高H唯一确定，所以这种逼近的过程可以建模为回归问题。</p>
+</blockquote>
+<p>对于窗口，一般使用四维向量(x,y,w,h) 来表示， 分别表示窗口的中心点坐标和宽高。对于下图, 红色的框 P 代表原始的Proposal, 绿色的框 G 代表目标的 Ground Truth。我们的目标是寻找一种关系，使得输入原始的窗口 P 经过映射，得到一个跟真实窗口 G 更接近的回归窗口G^。</p>
+<p><img src="/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-1.png" alt="玖涯博客"></p>
 <blockquote>
-<p>所以，只有表示的图为<strong>稠密图</strong>，且<strong>频繁地判断某特定的结点对是否相邻</strong>时，使用邻接矩阵较为适宜。</p>
+<p><strong>边框回归的目的即为：给定(Px,Py,Pw,Ph)寻找一种映射f，使得f(Px,Py,Pw,Ph)=(Gx^,Gy^,Gw^,Gh^) 并且(Gx^,Gy^,Gw^,Gh^)≈(Gx,Gy,Gw,Gh)</strong></p>
 </blockquote>
-<h2 id="邻接链表"><a href="#邻接链表" class="headerlink" title="邻接链表"></a>邻接链表</h2><p>邻接链表是一种链式存储结构，其为图的<strong>每个顶点</strong>建立一个<strong>单链表</strong>，第i个单链表中保存<font color=#0000FF>与结点Vi相邻的所有结点</font>（无向图）或所有以结点Vi为弧尾的弧指向的结点（有向图）及其相关信息。</p>
-<p><img src="/2020/02/12/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%941-%E5%9B%BE%E7%9A%84%E5%AD%98/pasted-1.png" alt="玖涯博客"></p>
+<h1 id="怎么做边框回归？"><a href="#怎么做边框回归？" class="headerlink" title="怎么做边框回归？"></a>怎么做边框回归？</h1><h2 id="Ⅰ-确定学习目标"><a href="#Ⅰ-确定学习目标" class="headerlink" title="Ⅰ.确定学习目标"></a>Ⅰ.确定学习目标</h2><p>何种方式才能使图2中的窗口P变为窗口G^呢？ 比较简单的思路就是：<font color=#FF0000><strong>平移+尺度放缩</strong></font>。</p>
+<p>如下图所示，候选框 P 没有很好地定位到目标，与标注框 G 存在位置和大小比例的差异。为了能使 P 逼近 G，需要寻找一种变换方法，<strong>直观的方式是对 P 先平移，再缩放</strong>。</p>
+<p><img src="/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-2.png" alt="确定学习目标"><br>假设存在变换 t*(.)，使得：</p>
+<p><img src="/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-3.png" alt="玖涯博客"><br>其中，<font color=#FF0000><strong>坐标乘以宽高是为了以平移的比例来计算，而宽高使用指数形式是为了保证缩放比例为正数</strong></font>。那么可以求出目标变换t*(.)为：</p>
+<p><img src="/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-4.png" alt="玖涯博客"></p>
+<h2 id="Ⅱ-确定损失函数"><a href="#Ⅱ-确定损失函数" class="headerlink" title="Ⅱ.确定损失函数"></a>Ⅱ.确定损失函数</h2><p>如下图所示，边框回归的输入是CNN在候选框所提取的feature map，当候选框与标注框的IoU较大时，从候选框到预测框的变换 d*(.) 可以认为是一种近似的线性变换，所以可以建立线性回归模型。</p>
+<p><img src="/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-5.png" alt="变换计算过程"></p>
+<p>再回顾一下线性回归的定义：</p>
 <blockquote>
-<p>空间复杂度为：O（n（点的数量）+e（边的数量）</p>
+<p>线性回归就是给定输入的特征向量 X, 学习一组参数 W, 使得经过线性回归后的值跟真实值 Y(Ground Truth)非常接近. 即<code>Y≈WX</code>。</p>
 </blockquote>
-<h3 id="缺陷-1"><a href="#缺陷-1" class="headerlink" title="缺陷"></a>缺陷</h3><p>与邻接矩阵相比，当其需要判断结点Vi与Vj间是否存在关系时就显得比较繁琐，它需要遍历Vi和Vj（无向图时任选一个）所有的邻接结点，才能判定它们之间是否存在关系。</p>
-<h3 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h3><p>若应用中存在<strong>大量遍历</strong>邻接结点的操作而<u>较少判断</u>两个特定结点的关系时，我们选用邻接链表较为适宜。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><blockquote>
-<p><font color=#FF0000>这里，考虑到使用链表需要对其相当熟悉和熟练，因此推荐使用<strong>标准模板库（STL）中的标准模板std::vector</strong>。</font></p>
-</blockquote>
+<p>那么 Bounding-box 中我们的输入以及输出分别是什么呢？</p>
 <ul>
-<li>边（edge）结构体声明：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line"><span class="keyword">int</span> nextNode;<span class="comment">//下一个结点编号</span></span><br><span class="line"><span class="keyword">int</span> cost;<span class="comment">//该边的权重</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li>我们为每一个结点都建立一个单链表来保存与其相邻的边权值和结点的信息。我们使用vector来模拟这些单链表，利用如下语句为每一个结点都建立一个vector对象（结点数量为N）。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; <span class="comment">//声明使用标准命名空间</span></span><br><span class="line"><span class="built_in">vector</span>&lt;Edge&gt; edge[N];</span><br></pre></td></tr></table></figure></li>
-<li>单链表的初始化：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; N;i ++) &#123; <span class="comment">//遍历所有结点</span></span><br><span class="line">	edge[i].clear(); <span class="comment">//清空其单链表</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>向邻接矩阵中添加信息（调用vector::push_back(Edge)）：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Edge tmp; <span class="comment">//准备一个Edge结构体</span></span><br><span class="line">tmp.nextNode = <span class="number">3</span>; <span class="comment">//下一结点编号为3</span></span><br><span class="line">tmp.cost = <span class="number">38</span>; <span class="comment">//该边权值为38</span></span><br><span class="line">edge[<span class="number">1</span>].push_back(tmp); <span class="comment">//将该边加入结点1的单链表中</span></span><br></pre></td></tr></table></figure></li>
-<li>需要查询某个结点的所有邻接信息时，对vector进行遍历：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对edge[2]进行遍历,即对所有与结点2相邻的边进行遍历，edge[2].size()表示其大小</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; edge[<span class="number">2</span>].size();i ++) &#123; </span><br><span class="line">	<span class="keyword">int</span> nextNode = edge[<span class="number">2</span>][i].nextNode; <span class="comment">//读出邻接结点</span></span><br><span class="line">	<span class="keyword">int</span> cost = edge[<span class="number">2</span>][i].cost; <span class="comment">//读出该边权值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><blockquote>
-<p>当我们需要<strong>删除</strong>某个单链表中的某些边信息时，我们调用<font color=FF0000>vector::erase</font>。<br>若我们要删除结点1的单链表中edge[1][i]所对应的边信息时，我们使用如下语句：</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">edge[<span class="number">1</span>].erase(edge[<span class="number">1</span>].begin() + i,edge[<span class="number">1</span>].begin() + i + <span class="number">1</span>);</span><br><span class="line"><span class="comment">//即vector.erase(vector.begin() + 第一个要删除的元素编号，vector.begin() + 最后一个要删除元素的编号 + 1</span></span><br></pre></td></tr></table></figure></li>
+<li>输入：<code>RegionProposal→P=(Px,Py,Pw,Ph)</code> ，这个是什么？ 输入就是这四个数值吗？<strong>其实真正的输入是这个窗口对应的 CNN 特征，也就是 R-CNN 中的 Pool5 feature（特征向量）</strong>。 (注：训练阶段输入还包括 Ground Truth， 也就是下边提到的<code>t∗=(tx,ty,tw,th))</code></li>
+<li>输出：需要进行的平移变换和尺度缩放 dx(P),dy(P),dw(P),dh(P)， 或者说是Δx,Δy,Sw,Sh 。</li>
 </ul>
+<p>那么目标函数可以表示为<code>d∗(P)=wT∗Φ5(P)</code>，<code>Φ5(P)</code>是输入 Proposal 的特征向量，<code>w∗</code>是要学习的参数（<code>*</code>表示 x,y,w,h， 也就是每一个变换对应一个目标函数） , <code>d∗(P)</code>是得到的预测值。 我们要让预测值跟真实值<code>t∗=(tx,ty,tw,th)</code>差距最小， 得到损失函数为：<br><img src="/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-6.png" alt="损失函数"><br>函数优化目标为：<br><img src="/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92/pasted-7.png" alt="函数优化目标"><br>然后<strong>利用梯度下降法或者最小二乘法就可以得到 w∗</strong>。</p>
 
     </div>
 
@@ -352,6 +384,10 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/" rel="tag"># 毕业设计</a>
+              <a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" rel="tag"># 目标检测</a>
+          </div>
 
         
 
@@ -359,13 +395,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/02/11/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E3%80%8B%E2%80%94%E2%80%944-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91/" rel="prev" title="王道机试第三章《数据结构》——4.二叉排序树">
-      <i class="fa fa-chevron-left"></i> 王道机试第三章《数据结构》——4.二叉排序树
+    <a href="/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C%EF%BC%89/" rel="prev" title="毕设学习之旅-3.RPN（区域生成网络）">
+      <i class="fa fa-chevron-left"></i> 毕设学习之旅-3.RPN（区域生成网络）
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/02/19/%E7%8E%8B%E9%81%93%E6%9C%BA%E8%AF%95%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%8A%E5%9B%BE%E8%AE%BA%E3%80%8B%E2%80%94%E2%80%942-%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="next" title="王道机试第五章《图论》——2.并查集">
-      王道机试第五章《图论》——2.并查集 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -426,7 +459,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图的相关概念"><span class="nav-number">2.</span> <span class="nav-text">图的相关概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图的存储"><span class="nav-number">3.</span> <span class="nav-text">图的存储</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#邻接矩阵"><span class="nav-number">3.1.</span> <span class="nav-text">邻接矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缺陷"><span class="nav-number">3.1.1.</span> <span class="nav-text">缺陷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用场景"><span class="nav-number">3.1.2.</span> <span class="nav-text">使用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#邻接链表"><span class="nav-number">3.2.</span> <span class="nav-text">邻接链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缺陷-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">缺陷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用场景-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">3.2.3.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要边框回归？"><span class="nav-number">2.</span> <span class="nav-text">为什么要边框回归？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是边框回归？"><span class="nav-number">3.</span> <span class="nav-text">什么是边框回归？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#怎么做边框回归？"><span class="nav-number">4.</span> <span class="nav-text">怎么做边框回归？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅰ-确定学习目标"><span class="nav-number">4.1.</span> <span class="nav-text">Ⅰ.确定学习目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅱ-确定损失函数"><span class="nav-number">4.2.</span> <span class="nav-text">Ⅱ.确定损失函数</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
