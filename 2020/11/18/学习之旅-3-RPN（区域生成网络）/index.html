@@ -50,20 +50,24 @@
   };
 </script>
 
-  <meta name="description" content="前言 今天是每周的工作汇报日，上午看了小视科技的课程视频-人脸口罩识别（分类+检测），下午和老师和同学讨论了下毕设想法和进度，因此今天自学的内容比较少一些。推荐一篇博文，讲得非常详细，真正看懂RPN正是通过这篇博客：RPN（区域生成网络）  在《Position Detection and Direction Prediction for Arbitrary-Oriented Ships via">
+  <meta name="description" content="前言 今天是每周的工作汇报日，上午看了小视科技的课程视频-人脸口罩识别（分类+检测），下午和老师和同学讨论了下毕设想法和进度，因此今天自学的内容比较少一些。两篇参考博文：  RPN（区域生成网络） 一文读懂RPN和ROI Align   在《Position Detection and Direction Prediction for Arbitrary-Oriented Ships via Mu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="毕设学习之旅-3.RPN（区域生成网络）">
 <meta property="og:url" content="https://gknl.github.io/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C%EF%BC%89/index.html">
 <meta property="og:site_name" content="钢盔女郎の博客">
-<meta property="og:description" content="前言 今天是每周的工作汇报日，上午看了小视科技的课程视频-人脸口罩识别（分类+检测），下午和老师和同学讨论了下毕设想法和进度，因此今天自学的内容比较少一些。推荐一篇博文，讲得非常详细，真正看懂RPN正是通过这篇博客：RPN（区域生成网络）  在《Position Detection and Direction Prediction for Arbitrary-Oriented Ships via">
+<meta property="og:description" content="前言 今天是每周的工作汇报日，上午看了小视科技的课程视频-人脸口罩识别（分类+检测），下午和老师和同学讨论了下毕设想法和进度，因此今天自学的内容比较少一些。两篇参考博文：  RPN（区域生成网络） 一文读懂RPN和ROI Align   在《Position Detection and Direction Prediction for Arbitrary-Oriented Ships via Mu">
 <meta property="og:image" content="https://gknl.github.io/2020/11/18/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-0.png">
+<meta property="og:image" content="https://gknl.github.io/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-4.png">
 <meta property="og:image" content="https://gknl.github.io/2020/11/18/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-1.png">
 <meta property="og:image" content="https://gknl.github.io/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-0.png">
 <meta property="og:image" content="https://gknl.github.io/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-1.png">
 <meta property="og:image" content="https://gknl.github.io/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-2.png">
 <meta property="og:image" content="https://gknl.github.io/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-3.png">
+<meta property="og:image" content="https://gknl.github.io/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-5.png">
+<meta property="og:image" content="https://gknl.github.io/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-6.png">
+<meta property="og:image" content="https://gknl.github.io/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-7.png">
 <meta property="article:published_time" content="2020-11-18T13:58:00.000Z">
-<meta property="article:modified_time" content="2020-11-22T11:21:51.700Z">
+<meta property="article:modified_time" content="2020-11-23T09:36:09.587Z">
 <meta property="article:author" content="PM">
 <meta property="article:tag" content="毕业设计">
 <meta property="article:tag" content="目标检测">
@@ -252,7 +256,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-22 19:21:51" itemprop="dateModified" datetime="2020-11-22T19:21:51+08:00">2020-11-22</time>
+                <time title="修改时间：2020-11-23 17:36:09" itemprop="dateModified" datetime="2020-11-23T17:36:09+08:00">2020-11-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -293,14 +297,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
+              <span>4.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -313,14 +317,31 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
-<p>今天是每周的工作汇报日，上午看了小视科技的课程视频-人脸口罩识别（分类+检测），下午和老师和同学讨论了下毕设想法和进度，因此今天自学的内容比较少一些。<br><strong>推荐一篇博文，讲得非常详细，真正看懂RPN正是通过这篇博客：<a href="https://www.cnblogs.com/Terrypython/p/10584384.html" target="_blank" rel="noopener">RPN（区域生成网络）</a></strong></p>
+<p>今天是每周的工作汇报日，上午看了小视科技的课程视频-人脸口罩识别（分类+检测），下午和老师和同学讨论了下毕设想法和进度，因此今天自学的内容比较少一些。<br>两篇参考博文：</p>
+<ol>
+<li><a href="https://www.cnblogs.com/Terrypython/p/10584384.html" target="_blank" rel="noopener">RPN（区域生成网络）</a></li>
+<li><a href="https://www.bilibili.com/read/cv5130757/" target="_blank" rel="noopener">一文读懂RPN和ROI Align</a></li>
+</ol>
 </blockquote>
 <p>在《Position Detection and Direction Prediction for Arbitrary-Oriented Ships via Multitask Rotation Region Convolutional Neural Network》论文中，网络结构如下图所示：</p>
 <p><img src="/2020/11/18/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-0.png" alt="玖涯博客"></p>
 <p>该模型用到了RPN，对其不解之处，查阅了相关博文，并在此处记录。</p>
-<p><font color=#FF0000><strong>RPN全称是Region Proposal Network，Region Proposal的中文意思是“区域选取”，也就是“提取候选框”的意思，所以RPN就是用来提取候选框的网络。</strong></font></p>
 <a id="more"></a>
 
+<hr>
+<p>RPN和roi align是two-stage detector中比较关键的两个操作，这两个操作将two-stage detector中的两个stage连接起来，变成end-to-end（端到端）的网络，同时也给整个检测方法的性能带来提升。</p>
+<p><img src="/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-4.png" alt="玖涯博客"></p>
+<blockquote>
+<p><font color=#FF0000><strong>RPN全称是Region Proposal Network，其作用是为roi align提供高质量的候选框，即proposal。</strong></font></p>
+</blockquote>
+<p><strong>RPN有三个主要任务</strong>：</p>
+<ol>
+<li>生成Anchors；</li>
+<li>分类任务：从众多anchor中，判断哪些anchor是正样本，哪些是负样本；</li>
+<li>回归任务：对于正样本的anchor，通过Bounding Box回归以获得真正的目标</li>
+</ol>
+<p>本文主要对整体流程和分类任务深入探讨，”回归任务”详情参见<a href="https://gknl.github.io/2020/11/22/%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-4-Bounding-Box-Regression%EF%BC%88%E8%BE%B9%E7%95%8C%E6%A1%86%E5%9B%9E%E5%BD%92%EF%BC%89/">毕设学习之旅-4.Bounding Box Regression（边界框回归）</a></p>
+<hr>
 <h1 id="RPN的意义"><a href="#RPN的意义" class="headerlink" title="RPN的意义"></a>RPN的意义</h1><p>RPN第一次出现在世人眼中是在Faster RCNN这个结构中，专门用来提取候选框。</p>
 <p>在RCNN和Fast RCNN等物体检测架构中，用来提取候选框的方法通常是Selective Search，是比较传统的方法，而且比较耗时，在CPU上要2s一张图。<strong>所以作者提出RPN，专门用来提取候选框，一方面RPN耗时少，有更快的速度和更高的mAP，另一方面RPN可以很容易结合到Fast RCNN中，称为一个整体。</strong></p>
 <p>RPN的引入，可以说是真正意义上把物体检测整个流程融入到一个神经网络中，这个网络结构叫做Faster RCNN： <code>Faster RCNN = RPN + Fast RCNN</code></p>
@@ -330,18 +351,54 @@
 <p>关于其中的一些疑难点，解答如下：</p>
 <h2 id="Ⅰ-RPN的input特征图指的是哪个特征图？"><a href="#Ⅰ-RPN的input特征图指的是哪个特征图？" class="headerlink" title="Ⅰ.RPN的input特征图指的是哪个特征图？"></a>Ⅰ.RPN的input特征图指的是哪个特征图？</h2><p>RPN的输入特征图就是图1中Faster RCNN的公共Feature Map，也称共享Feature Map，主要用以RPN和RoI Pooling共享。</p>
 <h2 id="Ⅱ-为什么是用sliding-window？文中不是说用CNN么？"><a href="#Ⅱ-为什么是用sliding-window？文中不是说用CNN么？" class="headerlink" title="Ⅱ.为什么是用sliding window？文中不是说用CNN么？"></a>Ⅱ.为什么是用sliding window？文中不是说用CNN么？</h2><p>我们可以把3x3的sliding window看作是对特征图做了一次3x3的卷积操作，最后得到了一个channel数目是256的特征图，尺寸和公共特征图相同，我们假设是256 x （H x W）。</p>
-<h2 id="Ⅲ-256维特征向量如何获得的？"><a href="#Ⅲ-256维特征向量如何获得的？" class="headerlink" title="Ⅲ.256维特征向量如何获得的？"></a>Ⅲ.256维特征向量如何获得的？</h2><p>我们可以近似的把这个特征图看作有H x W个向量，每个向量是256维，那么图中的256维指的就是其中一个向量，然后我们要对每个特征向量做两次全连接操作，一个得到2个分数，一个得到4个坐标，由于我们要对每个向量做同样的全连接操作，等同于对整个特征图做两次1 x 1的卷积，得到一个<code>2*H*W</code>和一个<code>4*H*W</code>大小的特征图，换句话说，有<code>H*W</code>个结果，每个结果包含2个分数和4个坐标。<br><img src="/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-1.png" alt="问题1，2，3的解答描述图"><br>这里我们需要解释一下为何是2个分数：<strong>因为RPN是提候选框，还不用判断类别，所以只要求区分是不是物体就行，那么就有两个分数，前景（物体）的分数，以及背景的分数</strong>。<br>我们还需要注意：<strong>4个坐标是指针对原图坐标的偏移，首先一定要记住是原图</strong>。</p>
+<h2 id="Ⅲ-256维特征向量如何获得的？"><a href="#Ⅲ-256维特征向量如何获得的？" class="headerlink" title="Ⅲ.256维特征向量如何获得的？"></a>Ⅲ.256维特征向量如何获得的？</h2><p>我们可以近似的把这个特征图看作有H x W个向量，每个向量是256维，那么图中的256维指的就是其中一个向量，然后我们要对每个特征向量做两次全连接操作，一个得到2个分数，一个得到4个坐标，由于我们要对每个向量做同样的全连接操作，等同于对整个特征图做两次1 x 1的卷积，得到一个<code>2*H*W</code>和一个<code>4*H*W</code>大小的特征图，换句话说，有<code>H*W</code>个结果，每个结果包含2个分数和4个坐标。<br><img src="/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-1.png" alt="问题1，2，3的解答描述图"><br>这里我们需要解释一下为何是2个分数：<strong>因为RPN是提候选框，还不用判断类别，所以只要求区分是不是物体就行【二分类】，那么就有两个分数，前景（物体）的分数，以及背景的分数</strong>。<br>我们还需要注意：<strong>4个坐标是指针对原图坐标的偏移，首先一定要记住是原图</strong>。</p>
 <h2 id="Ⅳ-2k和4k中的k指的是什么？图右侧不同形状的矩形和Anchors又是如何得到的？"><a href="#Ⅳ-2k和4k中的k指的是什么？图右侧不同形状的矩形和Anchors又是如何得到的？" class="headerlink" title="Ⅳ.2k和4k中的k指的是什么？图右侧不同形状的矩形和Anchors又是如何得到的？"></a>Ⅳ.2k和4k中的k指的是什么？图右侧不同形状的矩形和Anchors又是如何得到的？</h2><p><img src="/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-2.png" alt="问题4的解答描述图"></p>
 <p>首先我们知道有<code>H*W</code>个结果，<strong>我们随机取一点，它跟原图肯定是有个一一映射关系的，由于原图和特征图大小不同，所以特征图上的一个点对应原图肯定是一个框。</strong></p>
 <p>然而这个框很小，比如说<code>8*8</code>，这里8是指原图和特征图的比例，所以这个并不是我们想要的框，那我们不妨把框的左上角或者框的中心作为锚点（Anchor），然后想象出一堆框，具体个数即为K个，这也就是图中所说的K anchor boxes（由锚点产生的K个框）。</p>
 <p>换句话说，<code>H*W</code>个点，每个点对应原图有K个框，那么就有<code>H*W*k</code>个框默默的在原图上，<font color=#FF0000><strong>那RPN的结果其实就是判断这些框是不是物体以及他们的偏移</strong></font>；那么K个框到底有多大，长宽比是多少？这里是预先设定好的，共有9种组合，所以k等于9，最后我们的结果是针对这9种组合的，所以有<code>H*W*9</code>个结果，也就是18个分数和36个坐标。</p>
-<h1 id="RPN的完整流程回顾"><a href="#RPN的完整流程回顾" class="headerlink" title="RPN的完整流程回顾"></a>RPN的完整流程回顾</h1><ol>
+<h1 id="RPN完整流程概述"><a href="#RPN完整流程概述" class="headerlink" title="RPN完整流程概述"></a>RPN完整流程概述</h1><ol>
 <li>首先通过一系列卷积得到公共特征图，假设他的大小是<code>N*16*16</code>;</li>
 <li>然后我们进入RPN阶段，首先经过一个<code>3*3</code>的卷积，得到一个<code>256*16*16</code>的特征图，也可以看作<code>16*16</code>个256维特征向量;</li>
-<li>然后经过两次<code>1*1</code>的卷积，分别得到一个<code>18*16*16</code>的特征图，和一个<code>36*16*16</code>的特征图，也就是<code>16*16*9</code>个结果，每个结果包含2个分数和4个坐标;</li>
-<li>再结合预先定义的Anchors，经过后处理，就得到候选框。</li>
+<li>【接下来进行两个分支操作】然后经过两次<code>1*1</code>的卷积，分别得到一个<code>18*16*16</code>的特征图，和一个<code>36*16*16</code>的特征图，也就是<code>16*16*9</code>个结果，每个结果包含2个分数和4个坐标;</li>
+<li>再结合预先定义的Anchors，经过<strong>一系列后处理</strong>，就得到候选框。</li>
 </ol>
 <p>整个流程如下图所示：<br><img src="/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-3.png" alt="RPN整个流程"></p>
+<hr>
+<h1 id="RPN步骤详解"><a href="#RPN步骤详解" class="headerlink" title="RPN步骤详解"></a>RPN步骤详解</h1><p>RPN全称是region proposalnetwork，作用是为第二阶段提供高质量的目标候选框，包括了anchor generator、anchor target generator、rpn loss、proposal generator几个关键的步骤，下面分别详细说明。</p>
+<h2 id="Ⅰ-Anchor-Generator"><a href="#Ⅰ-Anchor-Generator" class="headerlink" title="Ⅰ.Anchor Generator"></a>Ⅰ.Anchor Generator</h2><p>Anchor是根据scale和ratio预先设定的，这些参数在全特征图中共享。</p>
+<p>例如，使用stride=16的feature map作为目标检测的特征图，对于输入大小为<code>800*600</code>的图像，该特征图大小为<code>50*38</code>。其中anchor的scale【尺度】包括为（8，16，32），ratio【纵横比】参数包括（0.5，1，2），故产生9种anchor；对于<code>50*38</code>大小的特征图，共产生17100个anchor，<strong>平铺到原图时，有一部分框会超出图像边界</strong>。</p>
+<h2 id="Ⅱ-Anchor-Target-Generator"><a href="#Ⅱ-Anchor-Target-Generator" class="headerlink" title="Ⅱ.Anchor Target Generator"></a>Ⅱ.Anchor Target Generator</h2><p>有了anchor，这些anchor是均匀地平铺在特征图的每个像素处，<u>但是我们不知道哪些anchor是包括真实目标的</u>。<font color=#FF0000><strong>因此anchor target layer就完成区分哪些anchor是为正样本（包括真实目标），哪些anchor为负样本（只包括背景）的任务</strong></font>，具体方法是计算anchor与ground truth的IoU，评判标准有3条：</p>
+<ol>
+<li>对于每一个ground truth，选取一个与之有最大IoU的anchor作为正样本;</li>
+<li>对于每一个anchor，与ground truth的IoU大于某一个阈值t1的anchor，作为正样本;</li>
+<li><strong>并不是除了以上两条的anchor为负样本</strong>。而是与ground truth的IoU小于某一个阈值t2的anchor为负样本，<code>[t2,t1]</code>之间的样本为“don’t care”样本，既不是正样本也不是负样本，不参与模型优化，即：不参与计算rpn loss。</li>
+</ol>
+<blockquote>
+<p>第一条保证了每个ground truth都有一个anchor与之相对应，第二条保证了在众多的anchor中，可以筛选出一定数据量的anchor作为正样本，保证正负样本的平衡。</p>
+</blockquote>
+<h2 id="Ⅲ-RPN-Loss"><a href="#Ⅲ-RPN-Loss" class="headerlink" title="Ⅲ.RPN Loss"></a>Ⅲ.RPN Loss</h2><p>rpn有两个任务：从众多anchor中，判断哪些anchor是正样本，哪些是负样本，即分类任务；对于正样本的anchor，回归获得真正的目标，即回归任务。</p>
+<p><strong>所以loss由两部分组成</strong>，即：<br><code>RPN Loss = Classification Loss + Bounding Box Regression Loss</code></p>
+<ol>
+<li><p>分类任务，使用交叉熵loss【具体参见<a href="https://zhuanlan.zhihu.com/p/35709485" target="_blank" rel="noopener">损失函数 - 交叉熵损失函数</a>】:<br><img src="/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-5.png" alt="交叉熵损失函数"></p>
+</li>
+<li><p>回归任务使用smooth_L1 loss：<br><img src="/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-6.png" alt="玖涯博客"></p>
+</li>
+</ol>
+<p>那么，<strong>RPN Loss总的表达式如下</strong>：<br><img src="/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-7.png" alt="RPN Loss"></p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">对于上式中一些符号的解释：</span><br><span class="line"><span class="built_in">Pi</span>：网络输出的预测分类概率；</span><br><span class="line"><span class="built_in">Pi</span>*：标签。正样本时，<span class="built_in">Pi</span>*=<span class="number">1</span>;负样本时，<span class="built_in">Pi</span>*=<span class="number">0</span>；</span><br><span class="line">Ti：“预测的 Bounding <span class="built_in">Box</span>”的参数化坐标（parameterized coordinates）【例如：v = (Vx ,Vy ,Vh ,Vw ,Vθ )】；</span><br><span class="line">Ti*： “Ground Truth的 Bounding <span class="built_in">Box</span>”的参数化坐标，也就是学习的目标；</span><br><span class="line">Ncls: mini-batch size:</span><br><span class="line">Nreg: Anchor Location的数量；</span><br><span class="line">λ：权重平衡参数</span><br></pre></td></tr></table></figure>
+
+<h2 id="Ⅳ-Proposal-Generator"><a href="#Ⅳ-Proposal-Generator" class="headerlink" title="Ⅳ.Proposal Generator"></a>Ⅳ.Proposal Generator</h2><p>获得候选框的目的是为了给第二阶段提供优质的roi框，首先通过rpn_cls_prob筛选出topk_rpn_pre_nms个框，然后再经过NMS得到topk_rpn_post_nms个框，最终输出给roi align。</p>
+<blockquote>
+<p>在 RPN中部，分类分支（cls）和边框回归分支（bbox reg）分别对这堆anchor进行各种计算。<font color=#0000FF><strong>在RPN末端，通过对两个分支的结果进行汇总，来实现对anchor的初步筛除（先剔除越界的anchor，再根据cls结果通过非极大值抑制（NMS）算法去重）和初步偏移（根据bbox reg结果）</strong></font>，此时输出的都bbox改头换面叫 Proposal了。</p>
+</blockquote>
+<h1 id="RPN后续阶段-ROI-Align"><a href="#RPN后续阶段-ROI-Align" class="headerlink" title="RPN后续阶段-ROI Align"></a>RPN后续阶段-ROI Align</h1><p>这个阶段是在rpn提供的proposal的基础上，<strong>筛选出第二阶段的训练样本，并提取相应的特征，用于组建第二阶段的训练网络</strong>，主要包括两个部分：proposal target generator、feature crop and pooling。</p>
+<h2 id="Ⅰ-Proposal-Target-Generator"><a href="#Ⅰ-Proposal-Target-Generator" class="headerlink" title="Ⅰ.Proposal Target Generator"></a>Ⅰ.Proposal Target Generator</h2><p>这个操作的主要目的是: 在rpn产生的proposal的基础上，选择一定量(min_batch: 一般每张图选择256个proposal，或者512个proposal）的roi，作为训练第二阶段的样本，<font color=#FF0000><strong>并且要设定该min_batch中正负样本的比例，如正：负=1：3</strong></font>。</p>
+<h2 id="Ⅱ-Feature-Crop-and-Pooling"><a href="#Ⅱ-Feature-Crop-and-Pooling" class="headerlink" title="Ⅱ.Feature Crop and Pooling"></a>Ⅱ.Feature Crop and Pooling</h2><p>得到roi之后，根据roi大小，需要选择合适的特征层crop并pooling得到固定大小的feature map，这个过程称为roi align。</p>
+<p>原始的roi pooling也可以完成这个操作，但是由于计算过程使用取整操作，造成特征粗糙，对小目标检测效果不好，取整操作主要体现在以下两步：</p>
+<ol>
+<li>将roi边界量化为整数点坐标值，然后再选择合适feature map进行crop；</li>
+<li>将crop得到的区域平均分割成 k x k 个单元(bin)，在获取每个单元的左右边界时取整。</li>
+</ol>
 
     </div>
 
@@ -448,7 +505,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RPN的意义"><span class="nav-number">2.</span> <span class="nav-text">RPN的意义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RPN的运作机制"><span class="nav-number">3.</span> <span class="nav-text">RPN的运作机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅰ-RPN的input特征图指的是哪个特征图？"><span class="nav-number">3.1.</span> <span class="nav-text">Ⅰ.RPN的input特征图指的是哪个特征图？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅱ-为什么是用sliding-window？文中不是说用CNN么？"><span class="nav-number">3.2.</span> <span class="nav-text">Ⅱ.为什么是用sliding window？文中不是说用CNN么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅲ-256维特征向量如何获得的？"><span class="nav-number">3.3.</span> <span class="nav-text">Ⅲ.256维特征向量如何获得的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅳ-2k和4k中的k指的是什么？图右侧不同形状的矩形和Anchors又是如何得到的？"><span class="nav-number">3.4.</span> <span class="nav-text">Ⅳ.2k和4k中的k指的是什么？图右侧不同形状的矩形和Anchors又是如何得到的？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RPN的完整流程回顾"><span class="nav-number">4.</span> <span class="nav-text">RPN的完整流程回顾</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RPN的意义"><span class="nav-number">2.</span> <span class="nav-text">RPN的意义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RPN的运作机制"><span class="nav-number">3.</span> <span class="nav-text">RPN的运作机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅰ-RPN的input特征图指的是哪个特征图？"><span class="nav-number">3.1.</span> <span class="nav-text">Ⅰ.RPN的input特征图指的是哪个特征图？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅱ-为什么是用sliding-window？文中不是说用CNN么？"><span class="nav-number">3.2.</span> <span class="nav-text">Ⅱ.为什么是用sliding window？文中不是说用CNN么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅲ-256维特征向量如何获得的？"><span class="nav-number">3.3.</span> <span class="nav-text">Ⅲ.256维特征向量如何获得的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅳ-2k和4k中的k指的是什么？图右侧不同形状的矩形和Anchors又是如何得到的？"><span class="nav-number">3.4.</span> <span class="nav-text">Ⅳ.2k和4k中的k指的是什么？图右侧不同形状的矩形和Anchors又是如何得到的？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RPN完整流程概述"><span class="nav-number">4.</span> <span class="nav-text">RPN完整流程概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RPN步骤详解"><span class="nav-number">5.</span> <span class="nav-text">RPN步骤详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅰ-Anchor-Generator"><span class="nav-number">5.1.</span> <span class="nav-text">Ⅰ.Anchor Generator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅱ-Anchor-Target-Generator"><span class="nav-number">5.2.</span> <span class="nav-text">Ⅱ.Anchor Target Generator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅲ-RPN-Loss"><span class="nav-number">5.3.</span> <span class="nav-text">Ⅲ.RPN Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅳ-Proposal-Generator"><span class="nav-number">5.4.</span> <span class="nav-text">Ⅳ.Proposal Generator</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RPN后续阶段-ROI-Align"><span class="nav-number">6.</span> <span class="nav-text">RPN后续阶段-ROI Align</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅰ-Proposal-Target-Generator"><span class="nav-number">6.1.</span> <span class="nav-text">Ⅰ.Proposal Target Generator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ⅱ-Feature-Crop-and-Pooling"><span class="nav-number">6.2.</span> <span class="nav-text">Ⅱ.Feature Crop and Pooling</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -528,13 +585,13 @@
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">51k</span>
+    <span title="站点总字数">54k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">46 分钟</span>
+    <span title="站点阅读时长">49 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
