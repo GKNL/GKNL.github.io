@@ -359,7 +359,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-23 17:36:09" itemprop="dateModified" datetime="2020-11-23T17:36:09+08:00">2020-11-23</time>
+                <time title="修改时间：2020-11-23 19:23:49" itemprop="dateModified" datetime="2020-11-23T19:23:49+08:00">2020-11-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -422,6 +422,9 @@
 <p>在《Position Detection and Direction Prediction for Arbitrary-Oriented Ships via Multitask Rotation Region Convolutional Neural Network》论文中，网络结构如下图所示：</p>
 <p><img src="/2020/11/18/%E6%AF%95%E8%AE%BE%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C/pasted-0.png" alt="玖涯博客"></p>
 <p>该模型用到了RPN，对其不解之处，查阅了相关博文，并在此处记录。</p>
+<blockquote>
+<p>一个易错点：<font color=#FF0000><strong>RPN提取框是在原图上干的【即生成的Anchors是在原图上的！！！后续回归分支涉及的坐标，都是相对于原图】！！！！</strong></font></p>
+</blockquote>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/11/18/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%97%85-3-RPN%EF%BC%88%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E7%BD%91%E7%BB%9C%EF%BC%89/#more" rel="contents">
